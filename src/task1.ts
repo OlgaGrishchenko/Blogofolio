@@ -60,7 +60,7 @@ type Movie = {
 
 type Movies = Movie[];
 
-const movies: Movie = [
+const movies: Movies = [
    {
       id: 1
       title: "Black Widow",
