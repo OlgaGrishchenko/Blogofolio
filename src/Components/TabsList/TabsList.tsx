@@ -28,7 +28,7 @@ export const TabsList = () => {
          return <div 
       key={tab.key}
       onClick={ () => onTabClick(tab.key)}
-      className={classNames({[styles.activeTab] : tab.key === activeTab}, [styles.tab])}
+      className={classNames([styles.tab, {[styles.activeTab] : tab.key === activeTab}])}
       >{ tab.name }</div>;
       })}
    </div>
