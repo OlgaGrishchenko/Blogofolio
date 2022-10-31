@@ -1,0 +1,51 @@
+.container {
+   display: flex;
+   height: 100%;
+   flex: 1;
+   padding: 72px 400px;
+   flex-direction: column;
+   background-color: #f3f3f3;
+   gap: 72px;
+}
+
+.divGoBackButton{
+   margin-bottom: 32px;
+   font-family: "Inter";
+   font-style: normal;
+   font-weight: 400;
+   font-size: 16px;
+   line-height: 24px;
+   color: #313037;
+}
+
+.goBackButton:hover {
+   cursor: pointer;
+   color: #2231aa;
+ }
+
+.title{
+color: #313037;
+font-style: normal;
+font-weight: 700;
+font-size: 56px;
+line-height: 80px;
+}
+
+.formContainer{
+   border: 1px solid #DADADA;
+   padding: 40px;
+   align-self: center;
+}
+
+/*.darkContainer {
+   background: #313037;
+   color: white;
+}
+
+.darkContainer .goBackButton {
+   color: white;
+}
+
+.darkContainer .title {
+   color: white;
+}*/
