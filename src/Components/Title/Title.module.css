@@ -1,6 +1,7 @@
-.container {
+.title {
     font-weight: 700;
-    font-size: 32px;
-    line-height: 44px;
-    color: #313037
+    font-size: 56px;
+    line-height: 80px;
+    color: #313037;
+    margin: 0;
 }

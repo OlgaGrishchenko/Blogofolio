@@ -4,12 +4,13 @@ import styles from "./Title.module.css"
 
 type TitleProps = {
    title: string;
+   className: string;
 };
 
 const Title: FC<TitleProps> = ({title}) => {
-   return <div className={styles.container} >
+   return <h1 className={styles.title} >
    {title}
-    </div>
+    </h1>
 };
 
 export default Title;
