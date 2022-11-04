@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import FormContainer from "../../Components/FormContainer";
 import Input from "../../Components/Input";
 import Button, {ButtonTypes} from "../../Components/Button";
@@ -10,6 +10,14 @@ const SignIn = () => {
 
    const [login, setLogin] = useState('')
    const [password, setPassword] = useState('')
+
+   const inputRef = useRef<HTMLInputElement>(null);
+
+   useEffect(() => {
+      if (inputRef.current) {
+        inputRef.current.focus(); //если элемент существует, то на элемент, который содержится в этой рефе повесить статус focus
+      }
+    }, []);
    
    return (
       <FormContainer title={"Sign In"}>
@@ -20,6 +28,7 @@ const SignIn = () => {
                   value={login}
                   onChange={(value) => setLogin(value)}
                   placeholder={"Your email"}
+                  ref={inputRef}
                />
 
                <Input

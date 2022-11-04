@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import FormContainer from "../../Components/FormContainer";
 import Input from "../../Components/Input";
 import Button, {ButtonTypes} from "../../Components/Button";
@@ -12,6 +12,14 @@ const SignUp = () => {
    const [login, setLogin] = useState("");
    const [password, setPassword] = useState("");
    const [confirmPassword, setConfirmPassword] = useState("");
+
+   const inputRef = useRef<HTMLInputElement>(null);
+
+   useEffect(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, []);
    
    return (
       <FormContainer title={"Sign Up"}>
@@ -23,6 +31,7 @@ const SignUp = () => {
                   value={name}
                   onChange={(value) => setName(value)}
                   placeholder={"Your name"}
+                  ref={inputRef}
                />
                
                <Input

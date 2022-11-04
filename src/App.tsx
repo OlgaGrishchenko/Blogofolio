@@ -5,6 +5,10 @@ import "./index.css";
 import styles from "./App.module.css";
 import CardsList from "./Components/CardsList";
 import { CardType } from "./Constants/@types";
+import SignIn from "./Pages/SignIn";
+import SignUp from "./Pages/SignUp";
+import Success from "./Pages/Success";
+import ResetPassword from "./Pages/ResetPassword";
 
 const MOCK_CARD = {
     id: 0,
@@ -39,7 +43,7 @@ const App = () => {
 
     return (
         <div className={styles.container}>
-            <CardsList cardsList={MOCK_CARDS_LIST} />
+            <ResetPassword />
         </div>
     );
 };
