@@ -6,6 +6,11 @@ export type CardType = {
    lesson_num: number;
    title: string;
    author: number;
-}
+};
 
 export type CardsListType = Array<CardType>;
+
+export enum Theme {
+   Light = 'light',
+   Dark = 'dark'
+}

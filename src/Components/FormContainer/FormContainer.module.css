@@ -37,7 +37,7 @@ line-height: 80px;
    align-self: center;
 }
 
-/*.darkContainer {
+.darkContainer {
    background: #313037;
    color: white;
 }
@@ -46,6 +46,10 @@ line-height: 80px;
    color: white;
 }
 
+.darkContainer .goBackButton:hover {
+   color: #2231aa;
+}
+
 .darkContainer .title {
    color: white;
-}*/
+}

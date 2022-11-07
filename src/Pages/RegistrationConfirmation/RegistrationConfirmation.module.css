@@ -8,6 +8,10 @@
    width: 544px;
 }
 
+.darkContainerDesc {
+   color: white;
+}
+
 .button{
   margin-top: 48px;
   text-align: center;

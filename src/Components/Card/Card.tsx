@@ -3,6 +3,9 @@ import React, { FC } from "react";
 import { CardType } from "../../Constants/@types";
 import { BookmarkIcon, DislikeIcon, LikeIcon, MoreIcon } from "../../Assets";
 
+import { useThemeContext } from "../../Context/Theme";
+import { Theme } from "../../Constants/@types";
+
 //@ts-ignore
 import styles from "./Card.module.css";
 
@@ -24,6 +27,8 @@ const Card: FC<CardProps> = ({ card, size }) => {
    const isMedium = size === CardSize.Medium;
    const isSmall = size === CardSize.Small;
 
+   const { theme } = useThemeContext();
+
    return (
       <div
       className={classNames(styles.container, {
@@ -42,7 +47,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
 
                <div className={styles.headerContainer}>
                   <div className={styles.date}>{date}</div>
-                  <div className={classNames(styles.title, {[styles.smallTitle]: !isLarge})}>{title}</div>
+                  <div className={classNames(styles.title, {[styles.smallTitle]: !isLarge, [styles.darkTitle]: theme === Theme.Dark,})}>{title}</div>
                </div>
 
                {isLarge && <div className={styles.description}>{text}</div>}
