@@ -1,6 +1,5 @@
 .container {
    display: flex;
-   height: 100%;
    flex: 1;
    padding: 72px 400px;
    flex-direction: column;
@@ -35,6 +34,7 @@ line-height: 80px;
    border: 1px solid #DADADA;
    padding: 40px;
    align-self: center;
+   height: 100%;
 }
 
 .darkContainer {

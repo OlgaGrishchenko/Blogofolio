@@ -1,6 +1,6 @@
 import React, { FC, ChangeEvent, forwardRef } from "react";
 import classNames from "classnames";
-//@ts-ignore
+
 import styles from "./Input.module.css";
 
 type InputProps = {
@@ -11,6 +11,7 @@ type InputProps = {
     error?: string;
     title?: string;
     onDefaultClick?: () => void;
+    className?: string;
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {

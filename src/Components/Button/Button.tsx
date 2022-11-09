@@ -1,7 +1,6 @@
 import React, { FC, ReactElement } from "react";
 import classNames from "classnames";
 
-//@ts-ignore
 import styles from "./Button.module.css";
 
 export enum ButtonTypes {
@@ -13,7 +12,7 @@ export enum ButtonTypes {
 type ButtonProps = {
   title: string | ReactElement;
   type: ButtonTypes;
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
   disabled?: boolean;
 };

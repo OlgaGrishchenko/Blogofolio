@@ -2,14 +2,18 @@ import React, { useState, useRef, useEffect } from "react";
 import FormContainer from "../../Components/FormContainer";
 import Input from "../../Components/Input";
 import Button, {ButtonTypes} from "../../Components/Button";
+import classNames from "classnames";
+import { useThemeContext } from "../../Context/Theme";
+import { Theme } from "../../Constants/@types";
 
 //@ts-ignore
 import styles from "./ResetPassword.module.css";
 
 const ResetPassword = () => {
 
+   const { theme } = useThemeContext();
+
    const [login, setLogin] = useState('')
-   const [password, setPassword] = useState('')
 
    const inputRef = useRef<HTMLInputElement>(null);
 
@@ -22,7 +26,9 @@ const ResetPassword = () => {
    return (
       <FormContainer title={"Reset password"}>
             <>
-            <div className={styles.containerDesc}>
+            <div className={classNames(styles.containerDesc, {
+                    [styles.darkContainerDesc]: theme === Theme.Dark,
+                 })}>
                You will receive an email <span>example@gmail.com.</span> with a link to reset your password!
             </div>
 

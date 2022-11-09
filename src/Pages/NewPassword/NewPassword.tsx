@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
-
 import FormContainer from "../../Components/FormContainer";
 import Input from "../../Components/Input";
-import Button, {ButtonTypes} from "../../Components/Button";
-import { PathNames } from "../Router/Router";
+import Button, { ButtonTypes } from "../../Components/Button";
+import { useThemeContext } from "../../Context/Theme";
+import { Theme } from "../../Constants/@types";
+import classNames from "classnames";
 
-import styles from "./SignUp.module.css";
+//@ts-ignore
+import styles from "./NewPassword.module.css";
 
-const SignUp = () => {
+const NewPassword = () => {
 
-   const [name, setName] = useState("");
-   const [login, setLogin] = useState("");
    const [password, setPassword] = useState("");
    const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -24,30 +23,16 @@ const SignUp = () => {
     }, []);
    
    return (
-      <FormContainer title={"Sign Up"}>
+      <FormContainer title={"New password"}>
             <>
             <div className={styles.inputsContainer}>
                
-               <Input
-                  title={"Name"}
-                  value={name}
-                  onChange={(value) => setName(value)}
-                  placeholder={"Your name"}
-                  ref={inputRef}
-               />
-               
-               <Input
-                  title={"Email"}
-                  value={login}
-                  onChange={(value) => setLogin(value)}
-                  placeholder={"Your email"}
-               />
-
                <Input
                   title={"Password"}
                   value={password}
                   onChange={(value:string) => setPassword(value)}
                   placeholder={"Your password"}
+                  ref={inputRef}
                />
 
                <Input
@@ -60,19 +45,13 @@ const SignUp = () => {
                
                <Button
          className={styles.button}
-         title={"Sign Up"}
+         title={"Set password"}
          type={ButtonTypes.Primary}
          onClick={() => {}}
       />
-      <div className={styles.signContainer}>
-         {"Already have an account?"}{" "}
-          <NavLink to={PathNames.SignIn} className={styles.redirectButton}>
-            {"Sign In"}
-          </NavLink>
-      </div>
             </>
       </FormContainer>
    );
 };
 
-export default SignUp;
+export default NewPassword;

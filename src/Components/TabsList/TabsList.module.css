@@ -1,27 +1,34 @@
 .container {
-   width: 496px;
+   max-width: 1120px;
    height: 48px;
    display: flex;
-   justify-content: space-around;
+   justify-content: flex-start;
    column-gap: 40px;
    font-weight: 600;
    font-size: 16px;
    line-height: 24px;
    color: #313037;
    border-bottom: 1px solid #dadada;
+   margin-bottom: 40px;
 }
+.darkContainer {
+   color: white;
+}
+
 .tab {
    cursor: pointer;
-   width: 33%;
+   width: 13%;
    text-align: center;
 }
+
 .activeTab {
    border-bottom: 2px solid #313037;
 }
+
 .tab:hover {
    color: #2231AA;
-
 }
+
 .disabled {
    color: #8D8E97;
 }

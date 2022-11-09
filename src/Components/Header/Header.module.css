@@ -1,8 +1,8 @@
 .container {
-    height: 100vh;
-    width: 100vw;
+    display: flex;
+    position: relative;
+    height: 84px;
 }
-
 .burgerButton {
     padding: 30px;
 }
@@ -25,4 +25,23 @@
     75% {
         transform: scale(0.95, 1.05);
     }
+}
+
+.headerLine {
+    width: 100%;
+    height: 84px;
+    background-color: #2231aa;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.headerButtons {
+    display: flex;
+}
+
+.searchInput {
+  background-color: #5360CD;
+  width: 100%;
+  height: 100%;
+  border: none;
 }

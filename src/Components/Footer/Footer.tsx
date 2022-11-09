@@ -1,5 +1,5 @@
 import React from "react";
-//@ts-ignore
+
 import styles from "./Footer.module.css"
 import { useThemeContext } from "../../Context/Theme";
 import { Theme } from "../../Constants/@types";

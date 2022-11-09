@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-//@ts-ignore
+
 import styles from "./UserName.module.css"
 
 type UserNameProps = {

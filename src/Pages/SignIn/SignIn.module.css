@@ -30,7 +30,12 @@
    color: #8D8E97;
 }
 
-.span {
+.redirectButton {
    color: #2231AA;
    cursor: pointer;
+   text-decoration: none;
+}
+
+.redirectButton:hover {
+   text-decoration: underline;
 }
