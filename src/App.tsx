@@ -30,9 +30,7 @@ const App = () => {
 
     return (
         <ThemeProvider theme={theme} onChangeTheme={onChangeTheme}>
-            <div>
             <Router />
-            </div>
         </ThemeProvider>
         
     );

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import { PathNames } from '../../Pages/Router/Router';
+import { useNavigate } from "react-router-dom";
+import { PathNames } from "../../Pages/Router/Router";
 
 import Button, { ButtonTypes } from "../Button";
 import {
@@ -32,7 +32,7 @@ const Header = () => {
         navigate(PathNames.SignIn);
     };
 
-    const isLoggedIn = true;
+    const isLoggedIn = false;
 
     return (
         <div className={styles.container}>
@@ -45,14 +45,16 @@ const Header = () => {
             {isOpened && <Menu />}
 
             <div className={styles.headerLine}>
-                {isClicked && (
-                    <Input
-                        className={styles.searchInput}
-                        value={search}
-                        onChange={(value: string) => setSearch(value)}
-                        placeholder={"Search.."}
-                    />
-                )}
+                <div className={styles.inputContainer}>
+                    {isClicked && (
+                        <Input
+                            value={search}
+                            onChange={(value: string) => setSearch(value)}
+                            placeholder={"Search..."}
+                            className={styles.searchInput}
+                        />
+                    )}
+                </div>
 
                 <div className={styles.headerButtons}>
                     <Button
@@ -61,14 +63,16 @@ const Header = () => {
                         type={ButtonTypes.Primary}
                         className={styles.burgerButton}
                     />
-                    
-                {isLoggedIn ? (<UserName username={'Artem_Malkin'} />) : (
-                    <Button
-                        title={<UserIcon />}
-                        onClick={onLogInButton}
-                        type={ButtonTypes.Primary}
-                        className={styles.burgerButton}
-                    />
+
+                    {isLoggedIn ? (
+                        <UserName username={"Artem_Malkin"} />
+                    ) : (
+                        <Button
+                            title={<UserIcon />}
+                            onClick={onLogInButton}
+                            type={ButtonTypes.Primary}
+                            className={styles.burgerButton}
+                        />
                     )}
                 </div>
             </div>
