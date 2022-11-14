@@ -48,6 +48,10 @@
     color: #2231aa;
 }
 
+.darkTitle {
+    color: white;
+}
+
 .description {
     font-family: "Inter";
     font-weight: 400;

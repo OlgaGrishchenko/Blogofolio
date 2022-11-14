@@ -1,6 +1,9 @@
 .container {
    display: flex;
    gap: 32px;
+   max-width: 1200px;
+   margin: 0 auto;
+
 }
 .rightSide {
    display: flex;
@@ -17,4 +20,8 @@
    max-width: 736px;
    gap: 40px 32px;
    flex-wrap: wrap;
+}
+
+.darkContainer {
+   background: #313037;
 }

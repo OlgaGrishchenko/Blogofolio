@@ -9,6 +9,11 @@ import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import Success from "./Pages/Success";
 import ResetPassword from "./Pages/ResetPassword";
+import RegistrationConfirmation from "./Pages/RegistrationConfirmation";
+import ThemeProvider from "./Context/Theme/ThemeProvider";
+import { Theme } from "./Constants/@types"
+import ThemeSwitcher from "./Components/ThemeSwitcher";
+import Footer from "./Components/Footer";
 
 const MOCK_CARD = {
     id: 0,
@@ -37,14 +42,25 @@ const MOCK_CARDS_LIST = [
 const App = () => {
     const [cardsList, setCardsList] = useState<CardType[] | null>(null);
 
+    const [theme, setTheme] = useState(Theme.Dark);
+
     useEffect(() => {
         setCardsList(MOCK_CARDS_LIST);
     }, []);
 
+    const onChangeTheme = (value: Theme) => {
+        setTheme(value);
+    };
+
     return (
-        <div className={styles.container}>
-            <ResetPassword />
+        <ThemeProvider theme={theme} onChangeTheme={onChangeTheme}>
+            <div className={styles.container}>
+            <ThemeSwitcher />
+            <CardsList cardsList={MOCK_CARDS_LIST} />
+            <Footer />
         </div>
+        </ThemeProvider>
+        
     );
 };
 
