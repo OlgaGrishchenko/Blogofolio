@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { useThemeContext } from "../../Context/Theme";
+import { Theme } from "../../Constants/@types";
 
-//@ts-ignore
 import styles from "./TabsList.module.css";
 import classNames from "classnames";
 
@@ -22,8 +23,11 @@ export const TabsList = () => {
    const onTabClick = (tab: Tabs) => {
    setActiveTab(tab)
 };
+   const { theme } = useThemeContext();
 
-   return <div  className ={styles.container}>
+   return <div  className={classNames(styles.container, {
+      [styles.darkContainer]: theme === Theme.Dark,
+   })}>
       { TABS_NAMES.map(tab => {
          return <div 
       key={tab.key}

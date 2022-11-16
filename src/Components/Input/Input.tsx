@@ -1,6 +1,6 @@
 import React, { FC, ChangeEvent, forwardRef } from "react";
 import classNames from "classnames";
-//@ts-ignore
+
 import styles from "./Input.module.css";
 
 type InputProps = {
@@ -11,6 +11,7 @@ type InputProps = {
     error?: string;
     title?: string;
     onDefaultClick?: () => void;
+    className?: string;
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
@@ -22,7 +23,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         error,
         title,
         onDefaultClick,
+        className,
     } = props;
+
     const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
         onChange(event.target.value);
     };
@@ -31,15 +34,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         <div>
             {title && <div className={styles.title}>{title}</div>}
             <input
-                className={classNames(styles.input, {
-                    [styles.inputError]: error,
-                })}
                 value={value}
                 onChange={onChangeInput}
                 placeholder={placeholder}
                 disabled={disabled}
                 onClick={onDefaultClick}
                 ref={ref}
+                className={classNames(className, styles.input)}
             />
             {error && <div className={styles.textError}>{error}</div>}
         </div>

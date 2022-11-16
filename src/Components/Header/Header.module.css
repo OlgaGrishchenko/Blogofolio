@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    position: relative;
+    height: 84px;
+    margin-bottom: 72px;
+}
+.burgerButton {
+    padding: 30px;
+}
+
+.burgerButton:active {
+    animation: jelly 0.5s;
+}
+
+@keyframes jelly {
+    0%,
+    100% {
+        transform: scale(1, 1);
+    }
+    25% {
+        transform: scale(0.9, 1.1);
+    }
+    50% {
+        transform: scale(1.1, 0.9);
+    }
+    75% {
+        transform: scale(0.95, 1.05);
+    }
+}
+
+.headerLine {
+    width: 100%;
+    height: 84px;
+    background-color: #2231aa;
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+.headerButtons {
+    display: flex;
+}
+
+.searchInput {
+    background-color: #5360cd;
+    width: 100%;
+    height: 84px;
+    border: none;
+    padding-left: 32px;
+}
+
+.searchInput::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.searchInput::-moz-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.inputContainer {
+    width: 100%;
+}
