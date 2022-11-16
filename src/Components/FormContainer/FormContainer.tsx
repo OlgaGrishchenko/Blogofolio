@@ -3,7 +3,6 @@ import classNames from "classnames";
 import { useThemeContext } from "../../Context/Theme";
 import { Theme } from "../../Constants/@types";
 
-//@ts-ignore
 import styles from "./FormContainer.module.css";
 
 type FormContainerProps = {
