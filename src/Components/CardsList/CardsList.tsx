@@ -8,7 +8,6 @@ import { useThemeContext } from "../../Context/Theme";
 import { Theme } from "../../Constants/@types";
 import classNames from "classnames";
 
-//@ts-ignore
 import styles from "./CardsList.module.css";
 
 type CardsListProps = {
