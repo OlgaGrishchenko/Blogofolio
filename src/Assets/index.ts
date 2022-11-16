@@ -1,3 +1,5 @@
+import { UserIcon } from './icons/UserIcon';
+import { SearchIcon } from './icons/SearchIcon';
 import { MoonIcon } from './icons/MoonIcon';
 import { SunIcon } from './icons/SunIcon';
 export * from "./icons/BurgerClosedIcon";
@@ -8,3 +10,5 @@ export { BookmarkIcon } from "./icons/BookmarkIcon";
 export { MoreIcon } from "./icons/MoreIcon";
 export { SunIcon } from "./icons/SunIcon";
 export { MoonIcon} from "./icons/MoonIcon";
+export { SearchIcon } from "./icons/SearchIcon";
+export { UserIcon } from "./icons/UserIcon";
