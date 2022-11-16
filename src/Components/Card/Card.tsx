@@ -1,12 +1,10 @@
 import classNames from "classnames";
 import React, { FC } from "react";
-import { CardType } from "../../Constants/@types";
+import { CardType, Theme } from "../../Constants/@types";
 import { BookmarkIcon, DislikeIcon, LikeIcon, MoreIcon } from "../../Assets";
 
 import { useThemeContext } from "../../Context/Theme";
-import { Theme } from "../../Constants/@types";
 
-//@ts-ignore
 import styles from "./Card.module.css";
 
 export enum CardSize {
