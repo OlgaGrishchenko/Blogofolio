@@ -1,6 +1,6 @@
 import React from "react";
 import { MoonIcon, SunIcon } from "../../Assets";
-//@ts-ignore
+
 import styles from "./ThemeSwitcher.module.css";
 import classNames from "classnames";
 import { useThemeContext } from "../../Context/Theme";
