@@ -78,6 +78,13 @@
 .iconButton:hover {
     cursor: pointer;
 }
+
+.darkIconButton {
+stroke: #dadada;
+fill: #dadada;
+}
+
+
 .mediumContainer {
     max-width: 352px;
 }
