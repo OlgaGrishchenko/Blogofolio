@@ -23,7 +23,7 @@ return (
    <>
       {selectedImage && (
          <Modal isOpen={isVisible} onRequestClose={onClose}>
-         <img src={selectedImage} alt={""} className={styles.image} />
+            <img src={selectedImage} alt={""} className={styles.image} />
          </Modal>
       )}
    </>
