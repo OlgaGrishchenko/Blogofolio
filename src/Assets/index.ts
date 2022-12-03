@@ -1,7 +1,3 @@
-import { UserIcon } from './icons/UserIcon';
-import { SearchIcon } from './icons/SearchIcon';
-import { MoonIcon } from './icons/MoonIcon';
-import { SunIcon } from './icons/SunIcon';
 export * from "./icons/BurgerClosedIcon";
 export * from "./icons/CloseIcon";
 export { LikeIcon } from "./icons/LikeIcon";
@@ -12,3 +8,4 @@ export { SunIcon } from "./icons/SunIcon";
 export { MoonIcon} from "./icons/MoonIcon";
 export { SearchIcon } from "./icons/SearchIcon";
 export { UserIcon } from "./icons/UserIcon";
+export { CloseModalICon } from "./icons/CloseModalICon";
