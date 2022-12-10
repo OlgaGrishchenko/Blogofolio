@@ -1,28 +1,23 @@
-import React, { useState } from "react";
+import React, { FC } from "react";
 import { useThemeContext } from "../../Context/Theme";
-import { Theme } from "../../Constants/@types";
+import { Theme, Tabs } from "../../Constants/@types";
 
 import styles from "./TabsList.module.css";
 import classNames from "classnames";
 
-export enum Tabs {
-    All = "all",
-    Favourites = "myFavourites",
-    Popular = "popular",
-}
+type TabProps = {
+   activeTab: Tabs;
+   onSelectTab: (tab: Tabs) => void;
+};
 
 const TABS_NAMES = [
-    { name: "All", key: Tabs.All },
-    { name: "My Favourites", key: Tabs.Favourites },
-    { name: "Popular", key: Tabs.Popular }
+   { name: "All", key: Tabs.All },
+   { name: "My Favourites", key: Tabs.Favourites },
+   { name: "Popular", key: Tabs.Popular }
 ];
 
-export const TabsList = () => {
+export const TabsList: FC<TabProps> = ({ activeTab, onSelectTab }) => {
 
-   const [activeTab, setActiveTab] = useState(Tabs.All);
-   const onTabClick = (tab: Tabs) => {
-   setActiveTab(tab)
-};
    const { theme } = useThemeContext();
 
    return <div  className={classNames(styles.container, {
@@ -31,9 +26,11 @@ export const TabsList = () => {
       { TABS_NAMES.map(tab => {
          return <div 
       key={tab.key}
-      onClick={ () => onTabClick(tab.key)}
+      onClick={ () => onSelectTab(tab.key)}
       className={classNames([styles.tab, {[styles.activeTab] : tab.key === activeTab}])}
-      >{ tab.name }</div>;
+         >
+            { tab.name }
+         </div>;
       })}
    </div>
 }
