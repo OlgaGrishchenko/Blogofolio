@@ -5,6 +5,7 @@
     border: 2px solid transparent;
     height: 56px;
     width: 544px;
+    padding-left: 16px;
 }
 
 .input:focus {

@@ -32,7 +32,7 @@ const MOCK_CARD = {
    title: "Astronauts prep for new solar arrays on nearly seven-hour spacewalk",
    author: 0,
 };
- 
+
 const Router = () => {
    return (
       <BrowserRouter>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate  } from "react-router-dom";
 
 import FormContainer from "../../Components/FormContainer";
 import Input from "../../Components/Input";
 import Button, {ButtonTypes} from "../../Components/Button";
 import { PathNames } from "../Router/Router";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../Redux/Reducers/authReducer";
 
 import styles from "./SignUp.module.css";
 
@@ -19,9 +21,25 @@ const SignUp = () => {
 
    useEffect(() => {
       if (inputRef.current) {
-        inputRef.current.focus();
+         inputRef.current.focus();
       }
-    }, []);
+   }, []);
+
+   const dispatch = useDispatch();
+
+   const navigate = useNavigate();
+
+   const onSignUp = () => {
+      dispatch(
+         registerUser({
+            data: { username: name, password, email: login },
+            callback: () =>
+            navigate(PathNames.RegistrationConfirmation, {
+            state: { email: login },
+            }),
+         })
+      );
+   };
    
    return (
       <FormContainer title={"Sign Up"}>
@@ -62,7 +80,7 @@ const SignUp = () => {
          className={styles.button}
          title={"Sign Up"}
          type={ButtonTypes.Primary}
-         onClick={() => {}}
+         onClick={onSignUp}
       />
       <div className={styles.signContainer}>
          {"Already have an account?"}{" "}

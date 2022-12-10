@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
 import { useThemeContext } from "../../Context/Theme";
 import { Theme, Tabs } from "../../Constants/@types";
@@ -10,6 +10,8 @@ import PostsSelectors from "../../Redux/Selectors/postsSelectors";
 
 import SelectedPostModal from "./SelectedPostModal";
 import SelectedImageModal from "./SelectedImageModal";
+
+import { getPosts } from "../../Redux/Reducers/postsReducer";
 
 import styles from "./Home.module.css";
 
@@ -87,7 +89,8 @@ const MOCK_CARDS_LIST = [
         title: "Astronauts prep for new solar arrays on nearly seven-hour spacewalk",
         author: 0,
     },
-    {   id: 7,
+    {
+        id: 7,
         image: "https://eurokurort.by/images/fotobank/nation/56/2970_big.jpg",
         text: "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
         date: "2022-11-01",
@@ -95,13 +98,14 @@ const MOCK_CARDS_LIST = [
         title: "Astronauts prep for new solar arrays on nearly seven-hour spacewalk",
         author: 0,
     },
-    {id: 8,
-    image: "https://eurokurort.by/images/fotobank/nation/56/19897_big.jpg",
-    text: "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    date: "2022-11-01",
-    lesson_num: 0,
-    title: "Astronauts prep for new solar arrays on nearly seven-hour spacewalk",
-    author: 0,
+    {
+        id: 8,
+        image: "https://eurokurort.by/images/fotobank/nation/56/19897_big.jpg",
+        text: "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
+        date: "2022-11-01",
+        lesson_num: 0,
+        title: "Astronauts prep for new solar arrays on nearly seven-hour spacewalk",
+        author: 0,
     },
     {
         id: 9,
@@ -126,13 +130,20 @@ const MOCK_CARDS_LIST = [
 const Home = () => {
     const { theme } = useThemeContext();
 
+    const dispatch = useDispatch();
+    const allPosts = useSelector(PostsSelectors.getAllPosts);
+    useEffect(() => {
+        dispatch(getPosts());
+    }, []);
+
     const [activeTab, setActiveTab] = useState(Tabs.All);
     const onTabClick = (tab: Tabs) => {
-        setActiveTab(tab)
+        setActiveTab(tab);
     };
 
     const likedPosts = useSelector(PostsSelectors.getLikedPosts);
     const savedPosts = useSelector(PostsSelectors.getSavedPosts);
+    
 
     const cardsArray = () => {
         if (activeTab === Tabs.Popular) {
@@ -140,7 +151,7 @@ const Home = () => {
         } else if (activeTab === Tabs.Favourites) {
             return savedPosts;
         } else {
-            return MOCK_CARDS_LIST;
+            return allPosts;
         }
     };
 
@@ -153,7 +164,7 @@ const Home = () => {
             >
                 {"Blog"}
             </div>
-            <TabsList activeTab={activeTab} onSelectTab={onTabClick}/>
+            <TabsList activeTab={activeTab} onSelectTab={onTabClick} />
             <CardsList cardsList={cardsArray()} />
             <SelectedPostModal />
             <SelectedImageModal />

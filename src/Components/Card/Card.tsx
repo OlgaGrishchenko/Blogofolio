@@ -112,7 +112,10 @@ const Card: FC<CardProps> = ({ card, size, isFromModal }) => {
                   >
                         <LikeIcon /> {isLiked && <span> 1</span>}
                   </div>
-                  <div className={styles.iconButton}
+
+                  <div className={classNames(styles.iconButton, {
+                     [styles.darkIconButton]: theme === Theme.Dark,
+                     })}
                   onClick={onStatusClick(LikeStatus.Dislike)}
                   >
                         <DislikeIcon /> {isDisliked && <span> 1</span>}
@@ -121,12 +124,16 @@ const Card: FC<CardProps> = ({ card, size, isFromModal }) => {
 
                <div className={styles.iconsContainer}>
 
-                  <div className={styles.iconButton}
+                  <div className={classNames(styles.iconButton, {
+                     [styles.darkIconButton]: theme === Theme.Dark,
+                     })}
                   onClick={onSaveClick}>
                         {isSaved ? <BookmarkSelectIcon /> : <BookmarkIcon />}
                   </div>
 
-                  <div className={styles.iconButton} onClick={!isFromModal ? onSettingClick : undefined}>
+                  <div className={classNames(styles.iconButton, {
+                     [styles.darkIconButton]: theme === Theme.Dark,
+                     })} onClick={!isFromModal ? onSettingClick : undefined}>
                         <MoreIcon />
                   </div>
                </div>
