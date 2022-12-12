@@ -5,6 +5,7 @@ import {
     LikeStatus,
     SetLikeStatusPayload,
 } from "../../Constants/@types";
+import {GetPostsPayload} from "../Types/posts"
 
 type PostsReducerState = {
     selectedPost: CardType | null;
@@ -14,6 +15,7 @@ type PostsReducerState = {
     savedPosts: CardsListType;
     allPosts: CardsListType;
     singlePost: CardType | null;
+    totalCount: number;
 };
 
 const initialState: PostsReducerState = {
@@ -24,6 +26,7 @@ const initialState: PostsReducerState = {
     savedPosts: [],
     allPosts: [],
     singlePost: null,
+    totalCount: 0,
 };
 
 const postsSlice = createSlice({
@@ -85,13 +88,15 @@ const postsSlice = createSlice({
             }
         },
 
-        getPosts: (state, action: PayloadAction<undefined>) => {},
+        getPosts: (state, action: PayloadAction<GetPostsPayload>) => {},
         setPosts: (state, action: PayloadAction<CardsListType>) => {state.allPosts = action.payload;
     },
 
         getSinglePost: (state, action: PayloadAction<string>) => {},
         setSinglePost: (state, action: PayloadAction<CardType>) => {state.singlePost = action.payload;
     },
+
+        setTotalCount: (state, action:PayloadAction<number>) => {state.totalCount = action.payload;},
 
     }
 });
@@ -105,6 +110,7 @@ const postsSlice = createSlice({
         setPosts,
         getSinglePost,
         setSinglePost,
+        setTotalCount,
     } =
         postsSlice.actions;
 

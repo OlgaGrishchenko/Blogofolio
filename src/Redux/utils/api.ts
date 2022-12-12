@@ -1,3 +1,4 @@
+import { PER_PAGE } from './../../Constants/constants';
 import { create } from "apisauce";
 import { RegisterUserData, ActivateUserData } from "../Types/auth";
 
@@ -7,8 +8,8 @@ const registerUser = (data: RegisterUserData) => {
    return API.post("/auth/users/", data);
 };
 
-const getAllPosts = () => {
-   return API.get("/blog/posts/?limit=11");
+const getAllPosts = (offset:number, search?: string) => {
+   return API.get("/blog/posts/", {limit:PER_PAGE, offset, search});
 };
 
 const activateUser = (data: ActivateUserData) => {
@@ -17,7 +18,7 @@ const activateUser = (data: ActivateUserData) => {
 
 const getSinglePost = (id: string) => {
    return API.get(`/blog/posts/${id}/`);
- };
+};
 
 export default {
    registerUser,

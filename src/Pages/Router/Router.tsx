@@ -9,6 +9,7 @@ import ResetPassword from "../ResetPassword";
 import Success from "../Success";
 import PagesWrapper from "../PagesWrapper";
 import ContentPage from "../ContentPage";
+import SearchPage from "../SearchPage";
 
 export enum PathNames {
    Home = "/",
@@ -19,20 +20,10 @@ export enum PathNames {
    RegistrationSuccess = "/sign-up/success",
    NewPassword = "/new-password",
    ResetPassword = "/reset-password",
-   Search = "/search",
+   Search = "/search/:searchString",
    ContentPage = "/content/:id",
    ActivateUser = "/activate/:uid/:token",
 }
-
-const MOCK_CARD = {
-   id: 0,
-   image: "https://pibig.info/uploads/posts/2022-03/1648204988_5-pibig-info-p-kvadratnaya-priroda-priroda-krasivo-foto-6.jpg",
-   text: "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-   date: "2022-11-01",
-   lesson_num: 0,
-   title: "Astronauts prep for new solar arrays on nearly seven-hour spacewalk",
-   author: 0,
-};
 
 const Router = () => {
    return (
@@ -48,8 +39,11 @@ const Router = () => {
                <Route path={PathNames.ActivateUser} element={<Success />} />
 
                <Route path={PathNames.ContentPage} element={<ContentPage />} />
+
+               <Route path={PathNames.Search} element={<SearchPage />} />
             </Route>
                <Route path="*" element={<Navigate to={PathNames.SignIn} />} />
+               
          </Routes>
       </BrowserRouter>
    );

@@ -22,9 +22,7 @@ const Header = () => {
     };
 
     const [isClicked, setClicked] = useState(false);
-    const onSearchClick = () => {
-        setClicked(!isClicked);
-    };
+
     const [search, setSearch] = useState("");
 
     const navigate = useNavigate();
@@ -33,6 +31,13 @@ const Header = () => {
     };
 
     const isLoggedIn = false;
+
+    const onSearchClick = () => {
+        if (isClicked) {
+            navigate(`search/${search}`);
+        }
+        setClicked(!isClicked);
+    };
 
     return (
         <div className={styles.container}>

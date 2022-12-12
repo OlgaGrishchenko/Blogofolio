@@ -8,4 +8,5 @@ export default {
   getSavedPosts: (state: RootState) => state.postsReducer.savedPosts,
   getAllPosts: (state: RootState) => state.postsReducer.allPosts,
   getSinglePost: (state: RootState) => state.postsReducer.singlePost,
+  getTotalCount: (state: RootState) => state.postsReducer.totalCount,
 };

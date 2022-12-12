@@ -30,3 +30,4 @@ export enum Tabs {
   Favourites = 'myFavourites',
   Popular = 'popular',
 }
+

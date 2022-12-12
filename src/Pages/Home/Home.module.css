@@ -14,3 +14,7 @@
  .darkPageTitle {
   color: white;
  }
+
+ .activePage {
+  font-weight: 600;
+ }
