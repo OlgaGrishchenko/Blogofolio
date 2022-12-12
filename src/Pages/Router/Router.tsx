@@ -20,7 +20,8 @@ export enum PathNames {
    NewPassword = "/new-password",
    ResetPassword = "/reset-password",
    Search = "/search",
-   ContentPage = "/content-page",
+   ContentPage = "/content/:id",
+   ActivateUser = "/activate/:uid/:token",
 }
 
 const MOCK_CARD = {
@@ -43,8 +44,10 @@ const Router = () => {
                <Route path={PathNames.NewPassword} element={<NewPassword />} />
                <Route path={PathNames.RegistrationConfirmation} element={<RegistrationConfirmation />} />
                <Route path={PathNames.ResetPassword} element={<ResetPassword />} />
-               <Route path={PathNames.RegistrationSuccess} element={<Success />} />
-               {<Route path={PathNames.ContentPage} element={<ContentPage card={MOCK_CARD}/>} />}
+
+               <Route path={PathNames.ActivateUser} element={<Success />} />
+
+               <Route path={PathNames.ContentPage} element={<ContentPage />} />
             </Route>
                <Route path="*" element={<Navigate to={PathNames.SignIn} />} />
          </Routes>

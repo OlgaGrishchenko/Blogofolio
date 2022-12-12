@@ -13,6 +13,7 @@ type PostsReducerState = {
     dislikedPosts: CardsListType;
     savedPosts: CardsListType;
     allPosts: CardsListType;
+    singlePost: CardType | null;
 };
 
 const initialState: PostsReducerState = {
@@ -22,6 +23,7 @@ const initialState: PostsReducerState = {
     dislikedPosts: [],
     savedPosts: [],
     allPosts: [],
+    singlePost: null,
 };
 
 const postsSlice = createSlice({
@@ -86,10 +88,24 @@ const postsSlice = createSlice({
         getPosts: (state, action: PayloadAction<undefined>) => {},
         setPosts: (state, action: PayloadAction<CardsListType>) => {state.allPosts = action.payload;
     },
+
+        getSinglePost: (state, action: PayloadAction<string>) => {},
+        setSinglePost: (state, action: PayloadAction<CardType>) => {state.singlePost = action.payload;
+    },
+
     }
 });
 
-    export const { setSelectedPost, setSelectedPostModalVisible, setLikeStatus, setSavedPosts, getPosts, setPosts } =
+    export const { 
+        setSelectedPost,
+        setSelectedPostModalVisible,
+        setLikeStatus,
+        setSavedPosts,
+        getPosts,
+        setPosts,
+        getSinglePost,
+        setSinglePost,
+    } =
         postsSlice.actions;
 
     const postsReducer = postsSlice.reducer;

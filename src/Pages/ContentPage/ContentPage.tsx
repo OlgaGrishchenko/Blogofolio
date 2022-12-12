@@ -6,32 +6,49 @@ import { BookmarkIcon, DislikeIcon, LikeIcon } from "../../Assets/index";
 import Button, { ButtonTypes } from "../../Components/Button";
 import { useThemeContext } from "../../Context/Theme";
 
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { PathNames } from "../Router/Router";
+import postsSelectors from "../../Redux/Selectors/postsSelectors";
+import { getSinglePost } from "../../Redux/Reducers/postsReducer";
+
 import styles from "./ContentPage.module.css";
 
-type ContentPageProps = {
-    card: CardType;
-};
 
-const ContentPage: FC<ContentPageProps> = ({ card }) => {
-    const { title, text, image } = card;
+const ContentPage = () => {
     const { theme } = useThemeContext();
 
-    return (
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const params = useParams();
+    const { id } = params;
+
+    useEffect(() => {
+        if (id) {
+            dispatch(getSinglePost(id));
+        }
+    }, []);
+
+    const card = useSelector(postsSelectors.getSinglePost);
+
+    return card ? (
         <div className={styles.container}>
 
             <div>
                 <div className={styles.headerContainer}>
-                    <div>{"Home"}</div>
+                    <div className={styles.homeLink}>{"Home"}</div>
                     <span>|</span>
                     <div className={styles.post}>{"Post 14278"}</div>
                 </div>
 
-                <h1 className={styles.title}>{title}</h1>
+                <h1 className={styles.title} onClick={() => navigate(PathNames.Home)}>
+                    {card?.title}
+                </h1>
             </div>
 
-            <img src={image} alt={"image"} className={styles.image} />
+            <img src={card?.image} alt={"image"} className={styles.image} />
 
-            <div className={styles.description}>{text}</div>
+            <div className={styles.description}>{card?.text}</div>
 
             <div className={styles.buttonContainer}>
                 <div className={styles.likeContainer}>
@@ -48,7 +65,7 @@ const ContentPage: FC<ContentPageProps> = ({ card }) => {
                 />
             </div>
         </div>
-    );
+    ) : null;
 };
 
 export default ContentPage;

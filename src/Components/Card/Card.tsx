@@ -10,6 +10,7 @@ import { CardType, Theme, LikeStatus } from "../../Constants/@types";
 import { BookmarkIcon, DislikeIcon, LikeIcon, MoreIcon, BookmarkSelectIcon } from "../../Assets";
 
 import { useThemeContext } from "../../Context/Theme";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Card.module.css";
 
@@ -26,9 +27,15 @@ type CardProps = {
 };
 
 const Card: FC<CardProps> = ({ card, size, isFromModal }) => {
-   const { title, text, image, date } = card;
+   const { title, text, image, date, id } = card;
 
    const dispatch = useDispatch();
+
+   const navigate = useNavigate();
+
+  const onTitleClick = () => {
+    navigate(`/content/${id}`);
+  };
 
    const likedPosts = useSelector(PostsSelectors.getLikedPosts);
    const dislikedPosts = useSelector(PostsSelectors.getDislikedPosts);
@@ -81,6 +88,7 @@ const Card: FC<CardProps> = ({ card, size, isFromModal }) => {
                            [styles.smallTitle]: !isLarge,
                            [styles.darkTitle]: theme === Theme.Dark,
                         })}
+                        onClick={onTitleClick}
                         >
                            {title}
                         </div>
