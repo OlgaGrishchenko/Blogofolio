@@ -14,27 +14,24 @@ import { PER_PAGE } from "../../Constants/constants";
 import { useParams } from "react-router";
 
 const SearchPage = () => {
-   const { theme } = useThemeContext();
+const { theme } = useThemeContext();
 
-   const dispatch = useDispatch();
-   const allPosts = useSelector(PostsSelectors.getAllPosts);
-   const [currentPage, setCurrentPage] = useState(1);
+const dispatch = useDispatch();
+const allPosts = useSelector(PostsSelectors.getAllPosts);
+const [currentPage, setCurrentPage] = useState(1);
 
+const totalCount = useSelector(PostsSelectors.getTotalCount);
+const totalPagesCount = Math.ceil(totalCount / PER_PAGE);
 
+const pages = Array.from(Array(totalPagesCount).keys());
 
+const onPageChange = (page: number) => () => setCurrentPage(page);
 
-   const totalCount = useSelector(PostsSelectors.getTotalCount);
-   const totalPagesCount = Math.ceil(totalCount / PER_PAGE);
+const {searchString} = useParams();
 
-   const pages = Array.from(Array(totalPagesCount).keys());
-
-   const onPageChange = (page: number) => () => setCurrentPage(page);
-
-   const {searchString} = useParams();
-
-   useEffect(() => {
+useEffect(() => {
       const offset = PER_PAGE * (currentPage - 1);
-      dispatch(getPosts({ offset, search: searchString }));
+    dispatch(getPosts({ offset, search: searchString }));
 }, [currentPage, searchString]);
 
     return (
@@ -47,14 +44,17 @@ const SearchPage = () => {
                 {"Search results"}
             </div>
             <CardsList cardsList={allPosts} />
-            <div
+            
+            
+            <div className={styles.pagination}>
+                <div
                 onClick={
                     currentPage !== 1
                         ? onPageChange(currentPage - 1)
                         : undefined
                 }
             >
-                Prev
+                ← Prev
             </div>
             <div>
                 {pages.map((i) => (
@@ -77,7 +77,8 @@ const SearchPage = () => {
                         : undefined
                 }
             >
-                Next
+                Next →
+            </div>
             </div>
         </div>
     );

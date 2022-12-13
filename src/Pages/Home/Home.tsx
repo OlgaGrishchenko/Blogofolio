@@ -74,9 +74,11 @@ const Home = () => {
             </div>
             <TabsList activeTab={activeTab} onSelectTab={onTabClick} />
             <CardsList cardsList={cardsArray()} />
-            <div onClick={currentPage !==1 ? onPageChange(currentPage-1) : undefined}>Prev</div>
-            <div>{pages.map(i => (<div onClick={onPageChange(i+1)} key={i} className={classNames({[styles.activePage]:(i+1)===currentPage})}> {i+1} </div>))}</div>
-            <div onClick={currentPage !==totalPagesCount ?onPageChange(currentPage+1) : undefined}>Next</div>
+            <div className={styles.pagination}>
+                <div onClick={currentPage !==1 ? onPageChange(currentPage-1) : undefined}>← Prev</div>
+                <div className={styles.pageNumber}>{pages.map(i => (<div onClick={onPageChange(i+1)} key={i} className={classNames({[styles.activePage]:(i+1)===currentPage})}> {i+1} </div>))}</div>
+                <div onClick={currentPage !==totalPagesCount ?onPageChange(currentPage+1) : undefined}>Next →</div>
+            </div>
             <SelectedPostModal />
             <SelectedImageModal />
         </div>
