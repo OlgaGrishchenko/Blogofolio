@@ -5,6 +5,7 @@ import {
     LikeStatus,
     SetLikeStatusPayload,
 } from "../../Constants/@types";
+import {GetPostsPayload} from "../Types/posts"
 
 type PostsReducerState = {
     selectedPost: CardType | null;
@@ -12,6 +13,9 @@ type PostsReducerState = {
     likedPosts: CardsListType;
     dislikedPosts: CardsListType;
     savedPosts: CardsListType;
+    allPosts: CardsListType;
+    singlePost: CardType | null;
+    totalCount: number;
 };
 
 const initialState: PostsReducerState = {
@@ -20,6 +24,9 @@ const initialState: PostsReducerState = {
     likedPosts: [],
     dislikedPosts: [],
     savedPosts: [],
+    allPosts: [],
+    singlePost: null,
+    totalCount: 0,
 };
 
 const postsSlice = createSlice({
@@ -80,11 +87,31 @@ const postsSlice = createSlice({
                 state.savedPosts.splice(SavedPostsIndex, 1);
             }
         },
+
+        getPosts: (state, action: PayloadAction<GetPostsPayload>) => {},
+        setPosts: (state, action: PayloadAction<CardsListType>) => {state.allPosts = action.payload;
+    },
+
+        getSinglePost: (state, action: PayloadAction<string>) => {},
+        setSinglePost: (state, action: PayloadAction<CardType>) => {state.singlePost = action.payload;
+    },
+
+        setTotalCount: (state, action:PayloadAction<number>) => {state.totalCount = action.payload;},
+
     }
 });
 
-    export const { setSelectedPost, setSelectedPostModalVisible, setLikeStatus, setSavedPosts } =
-        postsSlice.actions;
+    export const { 
+        setSelectedPost,
+        setSelectedPostModalVisible,
+        setLikeStatus,
+        setSavedPosts,
+        getPosts,
+        setPosts,
+        getSinglePost,
+        setSinglePost,
+        setTotalCount,
+    } = postsSlice.actions;
 
     const postsReducer = postsSlice.reducer;
     export default postsReducer;
@@ -113,4 +140,3 @@ const postsSlice = createSlice({
       //   if (likedIndex > -1) {  // Здесь определяем, ставили ли мы на этот пост лайк
       //     state.likedPosts.splice(likedIndex, 1);
       //   }
-      // }

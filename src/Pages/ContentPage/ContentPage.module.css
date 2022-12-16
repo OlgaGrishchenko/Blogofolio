@@ -6,6 +6,11 @@
     gap: 48px;
 }
 
+.homeLink:hover {
+    cursor: pointer;
+    color: #2231aa;
+}
+
 .headerContainer {
     display: flex;
     gap: 8px;
@@ -43,10 +48,10 @@
 }
 
 .buttonContainer{
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 72px;
-  border-bottom: 1px solid #DADADA;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 72px;
+    border-bottom: 1px solid #DADADA;
 }
 
 .likeContainer{
