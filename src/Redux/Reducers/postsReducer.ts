@@ -111,8 +111,7 @@ const postsSlice = createSlice({
         getSinglePost,
         setSinglePost,
         setTotalCount,
-    } =
-        postsSlice.actions;
+    } = postsSlice.actions;
 
     const postsReducer = postsSlice.reducer;
     export default postsReducer;
@@ -141,4 +140,3 @@ const postsSlice = createSlice({
       //   if (likedIndex > -1) {  // Здесь определяем, ставили ли мы на этот пост лайк
       //     state.likedPosts.splice(likedIndex, 1);
       //   }
-      // }

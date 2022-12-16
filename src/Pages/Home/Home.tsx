@@ -12,7 +12,6 @@ import SelectedPostModal from "./SelectedPostModal";
 import SelectedImageModal from "./SelectedImageModal";
 
 import { getPosts } from "../../Redux/Reducers/postsReducer";
-
 import styles from "./Home.module.css";
 import { PER_PAGE } from "../../Constants/constants";
 
@@ -40,18 +39,14 @@ const Home = () => {
     const [activeTab, setActiveTab] = useState(Tabs.All);
     const onTabClick = (tab: Tabs) => {
         setActiveTab(tab);
-    };
 
     const likedPosts = useSelector(PostsSelectors.getLikedPosts);
     const savedPosts = useSelector(PostsSelectors.getSavedPosts);
     const totalCount = useSelector(PostsSelectors.getTotalCount);
     const totalPagesCount = Math.ceil(totalCount/PER_PAGE);
-
-
     
-
     const pages = Array.from(Array(totalPagesCount).keys());
-    
+
     const cardsArray = () => {
         if (activeTab === Tabs.Popular) {
             return likedPosts;

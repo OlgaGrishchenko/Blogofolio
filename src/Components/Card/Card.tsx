@@ -43,7 +43,7 @@ const Card: FC<CardProps> = ({ card, size, isFromModal }) => {
    const isDisliked =
     dislikedPosts.findIndex((post) => post.id === card.id) > -1;
    const savedPosts = useSelector(PostsSelectors.getSavedPosts);
-   const isSaved = savedPosts.findIndex((post) => post.id === card.id) > -1;
+   const isSaved = savedPosts.findIndex((post) => post.id === card.id) > -1
 
    const isLarge = size === CardSize.Large;
    const isMedium = size === CardSize.Medium;
