@@ -14,16 +14,8 @@ import SelectedImageModal from "./SelectedImageModal";
 import { getPosts } from "../../Redux/Reducers/postsReducer";
 import styles from "./Home.module.css";
 import { PER_PAGE } from "../../Constants/constants";
-
-const MOCK_CARD = {
-    id: 0,
-    image: "https://pibig.info/uploads/posts/2022-03/1648204988_5-pibig-info-p-kvadratnaya-priroda-priroda-krasivo-foto-6.jpg",
-    text: "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
-    date: "2022-11-01",
-    lesson_num: 0,
-    title: "Astronauts prep for new solar arrays on nearly seven-hour spacewalk",
-    author: 0,
-};
+import rootSaga from "../../Redux/Sagas/rootSaga";
+import { RootState } from "../../Redux/store";
 
 const Home = () => {
     const { theme } = useThemeContext();
@@ -31,6 +23,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const allPosts = useSelector(PostsSelectors.getAllPosts);
     const [currentPage, setCurrentPage] = useState(1);
+    
     useEffect(() => {
         const offset = PER_PAGE * (currentPage - 1)
         dispatch(getPosts({offset}));
@@ -39,6 +32,7 @@ const Home = () => {
     const [activeTab, setActiveTab] = useState(Tabs.All);
     const onTabClick = (tab: Tabs) => {
         setActiveTab(tab);
+    };
 
     const likedPosts = useSelector(PostsSelectors.getLikedPosts);
     const savedPosts = useSelector(PostsSelectors.getSavedPosts);
@@ -56,7 +50,6 @@ const Home = () => {
             return allPosts;
         }
     };
-
     const onPageChange = (page:number) => () => setCurrentPage(page);
     return (
         <div className={styles.container}>

@@ -13,6 +13,7 @@ import { useThemeContext } from "../../Context/Theme";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./Card.module.css";
+import { RootState } from "../../Redux/store";
 
 export enum CardSize {
    Large = "large",

@@ -13,6 +13,7 @@ import postsSelectors from "../../Redux/Selectors/postsSelectors";
 import { getSinglePost } from "../../Redux/Reducers/postsReducer";
 
 import styles from "./ContentPage.module.css";
+import { RootState } from "../../Redux/store";
 
 
 const ContentPage = () => {
@@ -30,7 +31,6 @@ const ContentPage = () => {
     }, []);
 
     const card = useSelector(postsSelectors.getSinglePost);
-
     return card ? (
         <div className={styles.container}>
 
