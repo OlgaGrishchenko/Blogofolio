@@ -17,6 +17,7 @@ import AuthSelectors from "../../Redux/Selectors/authSelectors";
 import { PER_PAGE } from "../../Constants/consts";
 import rootSaga from "../../Redux/Sagas/rootSaga";
 import { RootState } from "../../Redux/store";
+import Loader from "../../Components/Loader";
 
 const Home = () => {
     const { theme } = useThemeContext();
@@ -38,6 +39,9 @@ const Home = () => {
     const likedPosts = useSelector(PostsSelectors.getLikedPosts);
     const savedPosts = useSelector(PostsSelectors.getSavedPosts);
     const totalCount = useSelector(PostsSelectors.getTotalCount);
+
+    const isLoading = useSelector(PostsSelectors.getPostsLoading);
+
     const totalPagesCount = Math.ceil(totalCount/PER_PAGE);
 
     const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
@@ -61,7 +65,7 @@ const Home = () => {
             ? [
                 { name: "My Posts", key: Tabs.MyPosts },
                 { name: "My Favourites", key: Tabs.Favourites },
-               ]
+            ]
             : []),
         { name: "Popular", key: Tabs.Popular }
     ], [isLoggedIn]);
@@ -75,6 +79,9 @@ const Home = () => {
             >
                 {"Blog"}
             </div>
+            
+            {!isLoading ? (
+            <>
             <TabsList activeTab={activeTab} onSelectTab={onTabClick} tabsList={TABS_NAMES}/>
             <CardsList cardsList={cardsArray()} />
             <div className={styles.pagination}>
@@ -84,6 +91,10 @@ const Home = () => {
             </div>
             <SelectedPostModal />
             <SelectedImageModal />
+            </>
+      ) : (
+        <Loader />
+      )}
         </div>
     );
 };

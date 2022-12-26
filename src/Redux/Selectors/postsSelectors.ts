@@ -9,4 +9,5 @@ export default {
   getAllPosts: (state: RootState) => state.postsReducer.allPosts,
   getSinglePost: (state: RootState) => state.postsReducer.singlePost,
   getTotalCount: (state: RootState) => state.postsReducer.totalCount,
+  getPostsLoading: (state: RootState) => state.postsReducer.isPostLoading,
 };

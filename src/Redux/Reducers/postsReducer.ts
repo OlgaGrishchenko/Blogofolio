@@ -15,6 +15,7 @@ type PostsReducerState = {
     savedPosts: CardsListType;
     allPosts: CardsListType;
     singlePost: CardType | null;
+    isPostLoading: boolean;
     totalCount: number;
 };
 
@@ -26,6 +27,7 @@ const initialState: PostsReducerState = {
     savedPosts: [],
     allPosts: [],
     singlePost: null,
+    isPostLoading: false,
     totalCount: 0,
 };
 
@@ -91,6 +93,9 @@ const postsSlice = createSlice({
         getPosts: (state, action: PayloadAction<GetPostsPayload>) => {},
         setPosts: (state, action: PayloadAction<CardsListType>) => {state.allPosts = action.payload;
     },
+        setPostsLoading: (state, action: PayloadAction<boolean>) => {
+            state.isPostLoading = action.payload;
+        },
 
         getSinglePost: (state, action: PayloadAction<string>) => {},
         setSinglePost: (state, action: PayloadAction<CardType>) => {state.singlePost = action.payload;
@@ -110,7 +115,9 @@ const postsSlice = createSlice({
         setPosts,
         getSinglePost,
         setSinglePost,
+        setPostsLoading,
         setTotalCount,
+
     } = postsSlice.actions;
 
     const postsReducer = postsSlice.reducer;
