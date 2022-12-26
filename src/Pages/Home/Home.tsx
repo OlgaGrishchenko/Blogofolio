@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
 import { useThemeContext } from "../../Context/Theme";
@@ -13,7 +13,8 @@ import SelectedImageModal from "./SelectedImageModal";
 
 import { getPosts } from "../../Redux/Reducers/postsReducer";
 import styles from "./Home.module.css";
-import { PER_PAGE } from "../../Constants/constants";
+import AuthSelectors from "../../Redux/Selectors/authSelectors";
+import { PER_PAGE } from "../../Constants/consts";
 import rootSaga from "../../Redux/Sagas/rootSaga";
 import { RootState } from "../../Redux/store";
 
@@ -38,6 +39,8 @@ const Home = () => {
     const savedPosts = useSelector(PostsSelectors.getSavedPosts);
     const totalCount = useSelector(PostsSelectors.getTotalCount);
     const totalPagesCount = Math.ceil(totalCount/PER_PAGE);
+
+    const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
     
     const pages = Array.from(Array(totalPagesCount).keys());
 
@@ -51,6 +54,18 @@ const Home = () => {
         }
     };
     const onPageChange = (page:number) => () => setCurrentPage(page);
+
+    const TABS_NAMES = useMemo ( () => [
+        { name: "All", key: Tabs.All },
+        ...(isLoggedIn
+            ? [
+                { name: "My Posts", key: Tabs.MyPosts },
+                { name: "My Favourites", key: Tabs.Favourites },
+               ]
+            : []),
+        { name: "Popular", key: Tabs.Popular }
+    ], [isLoggedIn]);
+
     return (
         <div className={styles.container}>
             <div
@@ -60,7 +75,7 @@ const Home = () => {
             >
                 {"Blog"}
             </div>
-            <TabsList activeTab={activeTab} onSelectTab={onTabClick} />
+            <TabsList activeTab={activeTab} onSelectTab={onTabClick} tabsList={TABS_NAMES}/>
             <CardsList cardsList={cardsArray()} />
             <div className={styles.pagination}>
                 <div onClick={currentPage !==1 ? onPageChange(currentPage-1) : undefined}>← Prev</div>

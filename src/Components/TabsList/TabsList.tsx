@@ -8,31 +8,43 @@ import classNames from "classnames";
 type TabProps = {
    activeTab: Tabs;
    onSelectTab: (tab: Tabs) => void;
+   disabled?: boolean;
+   tabsList: Array<{ name: string; key: Tabs }>;
 };
 
-const TABS_NAMES = [
-   { name: "All", key: Tabs.All },
-   { name: "My Favourites", key: Tabs.Favourites },
-   { name: "Popular", key: Tabs.Popular }
-];
 
-export const TabsList: FC<TabProps> = ({ activeTab, onSelectTab }) => {
+
+const TabsList: FC<TabProps> = ({
+   disabled,
+   activeTab,
+   onSelectTab,
+   tabsList,
+}) => {
 
    const { theme } = useThemeContext();
 
-   return <div  className={classNames(styles.container, {
-      [styles.darkContainer]: theme === Theme.Dark,
-   })}>
-      { TABS_NAMES.map(tab => {
-         return <div 
-      key={tab.key}
-      onClick={ () => onSelectTab(tab.key)}
-      className={classNames([styles.tab, {[styles.activeTab] : tab.key === activeTab}])}
-         >
-            { tab.name }
-         </div>;
-      })}
-   </div>
-}
+   return (
+      <div
+         className={classNames(styles.tabs, {
+         [styles.darkContainer]: theme === Theme.Dark,
+         })}
+      >
+         {tabsList.map((tab) => {
+            return (
+               <div
+                  key={tab.key}
+                  onClick={() => onSelectTab(tab.key)}
+                  className={classNames(styles.tab, {
+                  [styles.active]: tab.key === activeTab,
+                  [styles.disabled]: tab.key !== activeTab,
+                  })}
+               >
+               {tab.name}
+            </div>
+            );
+         })}
+      </div>
+   );
+};
 
 export default TabsList;

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SignIn from "../SignIn";
@@ -10,6 +11,9 @@ import Success from "../Success";
 import PagesWrapper from "../PagesWrapper";
 import ContentPage from "../ContentPage";
 import SearchPage from "../SearchPage";
+
+import AuthSelectors from "../../Redux/Selectors/authSelectors";
+import { getUserData } from "../../Redux/Reducers/authReducer";
 
 export enum PathNames {
    Home = "/",
@@ -25,7 +29,21 @@ export enum PathNames {
    ActivateUser = "/activate/:uid/:token",
 }
 
+const MockPage = () => {
+   return <div>{"Mock Page"}</div>;
+};
+
 const Router = () => {
+
+   const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+      if (isLoggedIn) {
+         dispatch(getUserData());
+      }
+   }, [isLoggedIn]);
+
    return (
       <BrowserRouter>
          <Routes>
@@ -39,6 +57,13 @@ const Router = () => {
                <Route path={PathNames.ActivateUser} element={<Success />} />
 
                <Route path={PathNames.ContentPage} element={<ContentPage />} />
+
+               <Route
+                  path={PathNames.AddPost}
+                  element={
+                  isLoggedIn ? <MockPage /> : <Navigate to={PathNames.SignIn} />
+                  }
+               />
 
                <Route path={PathNames.Search} element={<SearchPage />} />
             </Route>

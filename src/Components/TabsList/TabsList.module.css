@@ -1,4 +1,4 @@
-.container {
+.tabs {
    width: 1120px;
    height: 48px;
    display: flex;
@@ -11,24 +11,34 @@
    border-bottom: 1px solid #dadada;
    margin-bottom: 40px;
 }
-.darkContainer {
-   color: white;
-}
 
 .tab {
    cursor: pointer;
-   width: 13%;
-   text-align: center;
-}
-
-.activeTab {
+   font-weight: 600;
+   font-size: 16px;
+   line-height: 24px;
+   color: #313037;
+   padding: 0 40px 24px 40px;
+ }
+ 
+ .tab:hover {
+   color: #2231aa;
+ }
+ .disabled {
+   color: #8d8e97;
+ }
+ .active {
    border-bottom: 2px solid #313037;
-}
-
-.tab:hover {
-   color: #2231AA;
-}
-
-.disabled {
-   color: #8D8E97;
-}
+ }
+ .darkContainer {
+   background: #313037;
+   color: #ffffff;
+ }
+ .darkContainer .disabled {
+   color: #ffffff;
+ }
+ 
+ .darkContainer .active {
+   border-bottom: 2px solid #ffffff;
+   color: #ffffff;
+ }

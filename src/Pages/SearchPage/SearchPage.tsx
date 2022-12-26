@@ -10,7 +10,7 @@ import PostsSelectors from "../../Redux/Selectors/postsSelectors";
 import { getPosts } from "../../Redux/Reducers/postsReducer";
 
 import styles from "./SearchPage.module.css";
-import { PER_PAGE } from "../../Constants/constants";
+import { PER_PAGE } from "../../Constants/consts";
 import { useParams } from "react-router";
 
 const SearchPage = () => {

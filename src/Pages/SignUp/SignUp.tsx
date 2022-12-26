@@ -77,16 +77,17 @@ const SignUp = () => {
             </div>
                
                <Button
-         className={styles.button}
-         title={"Sign Up"}
-         type={ButtonTypes.Primary}
-         onClick={onSignUp}
-      />
+                  className={styles.button}
+                  title={"Sign Up"}
+                  type={ButtonTypes.Primary}
+                  onClick={onSignUp}
+               />
+               
       <div className={styles.signContainer}>
          {"Already have an account?"}{" "}
-          <NavLink to={PathNames.SignIn} className={styles.redirectButton}>
-            {"Sign In"}
-          </NavLink>
+            <NavLink to={PathNames.SignIn} className={styles.redirectButton}>
+               {"Sign In"}
+            </NavLink>
       </div>
             </>
       </FormContainer>
