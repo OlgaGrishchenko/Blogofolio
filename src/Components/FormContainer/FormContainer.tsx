@@ -4,6 +4,8 @@ import { useThemeContext } from "../../Context/Theme";
 import { Theme } from "../../Constants/@types";
 
 import styles from "./FormContainer.module.css";
+import { NavLink } from "react-router-dom";
+import { PathNames } from "../../Pages/Router/Router";
 
 type FormContainerProps = {
    title: string;
@@ -21,7 +23,7 @@ const FormContainer: FC<FormContainerProps> = ({ title, children }) => {
       >
          <div>
             <div className={styles.divGoBackButton}>
-               <a className={styles.goBackButton}>{"Back to home"}</a>
+            <NavLink to={PathNames.Home} className={styles.goBackButton}>{"Back to home"}</NavLink>
                </div>
                <div className={styles.title}>{title}</div>
          </div>

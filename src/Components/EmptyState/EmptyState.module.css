@@ -1,0 +1,23 @@
+.container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 50px;
+}
+
+.image {
+   width: 400px;
+   height: 100px;
+   fill: #80858B;
+}
+
+.description{
+   font-family: 'Exo 2';
+   font-style: normal;
+   font-weight: 600;
+   font-size: 20px;
+   line-height: 32px;
+   color: #80858B;
+   margin-bottom: 32px;
+}

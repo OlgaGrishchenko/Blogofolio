@@ -11,7 +11,7 @@ import PostsSelectors from "../../Redux/Selectors/postsSelectors";
 import SelectedPostModal from "./SelectedPostModal";
 import SelectedImageModal from "./SelectedImageModal";
 
-import { getPosts } from "../../Redux/Reducers/postsReducer";
+import { getMyPosts, getPosts } from "../../Redux/Reducers/postsReducer";
 import styles from "./Home.module.css";
 import AuthSelectors from "../../Redux/Selectors/authSelectors";
 import { PER_PAGE } from "../../Constants/consts";
@@ -24,17 +24,21 @@ const Home = () => {
 
     const dispatch = useDispatch();
     const allPosts = useSelector(PostsSelectors.getAllPosts);
+    const myPosts = useSelector(PostsSelectors.getMyPosts);
     const [currentPage, setCurrentPage] = useState(1);
     
-    useEffect(() => {
+    {/*useEffect(() => {
         const offset = PER_PAGE * (currentPage - 1)
         dispatch(getPosts({offset}));
-    }, [currentPage]);
+    }, [currentPage]);*/}
+
 
     const [activeTab, setActiveTab] = useState(Tabs.All);
     const onTabClick = (tab: Tabs) => {
         setActiveTab(tab);
     };
+
+
 
     const likedPosts = useSelector(PostsSelectors.getLikedPosts);
     const savedPosts = useSelector(PostsSelectors.getSavedPosts);
@@ -53,10 +57,13 @@ const Home = () => {
             return likedPosts;
         } else if (activeTab === Tabs.Favourites) {
             return savedPosts;
+        } else if (activeTab === Tabs.MyPosts) {
+            return myPosts;
         } else {
             return allPosts;
         }
     };
+
     const onPageChange = (page:number) => () => setCurrentPage(page);
 
     const TABS_NAMES = useMemo ( () => [

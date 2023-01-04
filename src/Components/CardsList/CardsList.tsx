@@ -9,6 +9,7 @@ import { Theme } from "../../Constants/@types";
 import classNames from "classnames";
 
 import styles from "./CardsList.module.css";
+import EmptyState from "../EmptyState";
 
 type CardsListProps = {
   cardsList: CardsListType | null;
@@ -41,7 +42,8 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
           })}
         </div>
       </div>
-    ): null
+    ): 
+    <EmptyState />
   };
 
 export default CardsList;
