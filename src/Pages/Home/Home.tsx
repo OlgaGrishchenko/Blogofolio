@@ -27,18 +27,16 @@ const Home = () => {
     const myPosts = useSelector(PostsSelectors.getMyPosts);
     const [currentPage, setCurrentPage] = useState(1);
     
-    {/*useEffect(() => {
+    useEffect(() => {
         const offset = PER_PAGE * (currentPage - 1)
         dispatch(getPosts({offset}));
-    }, [currentPage]);*/}
+    }, [currentPage]);
 
 
     const [activeTab, setActiveTab] = useState(Tabs.All);
     const onTabClick = (tab: Tabs) => {
         setActiveTab(tab);
     };
-
-
 
     const likedPosts = useSelector(PostsSelectors.getLikedPosts);
     const savedPosts = useSelector(PostsSelectors.getSavedPosts);
@@ -99,9 +97,9 @@ const Home = () => {
             <SelectedPostModal />
             <SelectedImageModal />
             </>
-      ) : (
+            ) : (
         <Loader />
-      )}
+        )}
         </div>
     );
 };

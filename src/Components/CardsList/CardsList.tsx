@@ -19,10 +19,10 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
 
   const { theme } = useThemeContext();
 
-   return cardsList && cardsList.length > 0 ? 
+    return cardsList && cardsList.length > 0 ? 
     (
       <div className={classNames(styles.container, {
-         [styles.darkContainer]: theme === Theme.Dark,
+          [styles.darkContainer]: theme === Theme.Dark,
       })}>
         <div className={styles.leftSide}>
           <Card card={cardsList[0]} size={CardSize.Large} />

@@ -40,7 +40,6 @@ function* getSinglePostWorker(action: PayloadAction<string>) {
   }
 }
 
-
 function* getMyPostsWorker (action: PayloadAction<undefined>) {
   yield put(setMyPostsLoading(true));
   const { ok, data, problem, status } = yield callCheckingAuth(API.getMyPosts);

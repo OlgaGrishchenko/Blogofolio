@@ -30,7 +30,6 @@ function* activateUserWorker(action: PayloadAction<ActivateUserPayload>) {
 
 function* signInUserWorker(action: PayloadAction<SignInUserPayload>) {
   const { data: signInData, callback } = action.payload;
-
   const { ok, problem, data } = yield call(API.signInUser, signInData);
   if (ok) {
     localStorage.setItem(ACCESS_TOKEN_KEY, data?.access);

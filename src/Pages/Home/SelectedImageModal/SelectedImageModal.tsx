@@ -20,9 +20,14 @@ const onClose = () => {
 };
 
 return (
+      <>
+      {selectedImage && (
          <Modal isOpen={isVisible} onRequestClose={onClose}>
             <img src={selectedImage} alt={""} className={styles.image} />
          </Modal>
-      )};
+      )}
+      </>
+);
+};
 
 export default SelectedImageModal;

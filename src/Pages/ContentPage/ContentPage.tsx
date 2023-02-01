@@ -6,7 +6,7 @@ import { BookmarkIcon, DislikeIcon, LikeIcon } from "../../Assets/index";
 import Button, { ButtonTypes } from "../../Components/Button";
 import { useThemeContext } from "../../Context/Theme";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { PathNames } from "../Router/Router";
 import postsSelectors from "../../Redux/Selectors/postsSelectors";
@@ -36,7 +36,9 @@ const ContentPage = () => {
 
             <div>
                 <div className={styles.headerContainer}>
-                    <div className={styles.homeLink}>{"Home"}</div>
+                    <div className={styles.homeLink}>
+                       <NavLink to={PathNames.Home} className={styles.goBackButton}>{"Home"}</NavLink>
+                    </div>
                     <span>|</span>
                     <div className={styles.post}>{"Post 14278"}</div>
                 </div>

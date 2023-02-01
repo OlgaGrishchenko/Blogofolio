@@ -11,7 +11,6 @@ import { useDispatch } from "react-redux";
 import { Theme } from "../../Constants/@types";
 import classNames from "classnames";
 
-//@ts-ignore
 import styles from "./Success.module.css";
 
 const Success = () => {

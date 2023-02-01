@@ -34,9 +34,9 @@ const Card: FC<CardProps> = ({ card, size, isFromModal }) => {
 
    const navigate = useNavigate();
 
-  const onTitleClick = () => {
-    navigate(`/content/${id}`);
-  };
+   const onTitleClick = () => {
+      navigate(`/content/${id}`);
+   };
 
    const likedPosts = useSelector(PostsSelectors.getLikedPosts);
    const dislikedPosts = useSelector(PostsSelectors.getDislikedPosts);
@@ -107,7 +107,7 @@ const Card: FC<CardProps> = ({ card, size, isFromModal }) => {
                      [styles.mediumImage]: isMedium,
                      [styles.smallImage]: isSmall,
                   })}
-                  onClick={onImageClick}
+                  onClick={isFromModal ? onImageClick : undefined}
                />
             </div>
 

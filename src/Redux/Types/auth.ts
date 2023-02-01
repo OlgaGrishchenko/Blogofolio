@@ -25,7 +25,6 @@ export type ActivateUserData = {
 
 export type ActivateUserPayload = GeneralDataWithCallback<ActivateUserData>;
 
-
 export type SignInUserData = {
    email: string;
    password: string;

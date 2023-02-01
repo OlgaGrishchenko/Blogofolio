@@ -55,7 +55,10 @@
 }
 
 .likeContainer{
-  display: flex;
-  gap: 6px;
+    display: flex;
+    gap: 6px;
 }
 
+.goBackButton {
+    text-decoration: none;
+}
