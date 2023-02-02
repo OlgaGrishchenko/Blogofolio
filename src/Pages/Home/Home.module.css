@@ -17,10 +17,6 @@
   color: white;
 }
 
-.activePage {
-  font-weight: 600;
-}
-
 .pagination {
   display: flex;
   flex-wrap: nowrap;
@@ -37,4 +33,14 @@
 .pageNumber {
   display: flex;
   gap: 10px;
+}
+
+.page:hover {
+  opacity: 0.8;
+}
+
+.activePage {
+  font-weight: 600;
+  cursor: pointer;
+  color: #2231AA;
 }
