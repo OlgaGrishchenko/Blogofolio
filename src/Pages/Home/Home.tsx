@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
 import { useThemeContext } from "../../Context/Theme";
-import { Theme, Tabs } from "../../Constants/@types";
+import { Theme, Tabs, Order } from "../../Constants/@types";
 
 import CardsList from "../../Components/CardsList";
 import TabsList from "../../Components/TabsList";
@@ -16,6 +16,7 @@ import styles from "./Home.module.css";
 import AuthSelectors from "../../Redux/Selectors/authSelectors";
 import { PER_PAGE } from "../../Constants/consts";
 import Loader from "../../Components/Loader";
+import Button, { ButtonTypes } from "../../Components/Button";
 
 const Home = () => {
     const { theme } = useThemeContext();
@@ -24,6 +25,15 @@ const Home = () => {
     const onTabClick = (tab: Tabs) => {
         setActiveTab(tab);
     };
+
+    const [ordering, setOrdering] = useState("");
+
+    const onClickOrdering = (order: Order) => () => {
+        if (ordering === order) {
+          setOrdering("");
+        } else setOrdering(order);
+        setCurrentPage(1);
+      };
 
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -60,9 +70,9 @@ const Home = () => {
         if (activeTab === Tabs.MyPosts) {
             dispatch(getMyPosts());
         } else {
-            dispatch(getPosts({ offset }));
+            dispatch(getPosts({ offset, ordering }));
         }
-    }, [activeTab, currentPage]);
+    }, [activeTab, currentPage, ordering]);
 
     const TABS_NAMES = useMemo ( () => [
         { name: "All", key: Tabs.All },
@@ -88,6 +98,25 @@ const Home = () => {
             {!isLoading ? (
             <>
             <TabsList activeTab={activeTab} onSelectTab={onTabClick} tabsList={TABS_NAMES}/>
+            <div className={styles.ordering}>
+                <Button 
+                    className={classNames(styles.button, {
+                        [styles.buttonClicked]: ordering === Order.Date,
+                    })}
+                    title={"Date"}
+                    type={ButtonTypes.Secondary}
+                    onClick={onClickOrdering(Order.Date)}
+                />
+
+                <Button 
+                    className={classNames(styles.button, {
+                        [styles.buttonClicked]: ordering === Order.Title,
+                    })}
+                    title={"Title"}
+                    type={ButtonTypes.Secondary}
+                    onClick={onClickOrdering(Order.Title)}
+                />
+            </div>
             <CardsList cardsList={cardsArray()} />
             <div className={styles.pagination}>
                 <div onClick={currentPage !==1 ? onPageChange(currentPage-1) : undefined}>← Prev</div>

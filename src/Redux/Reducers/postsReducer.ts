@@ -115,6 +115,7 @@ const postsSlice = createSlice({
         },
 
         setTotalCount: (state, action:PayloadAction<number>) => {state.totalCount = action.payload;},
+        
 
     }
 });

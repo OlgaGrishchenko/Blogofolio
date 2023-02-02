@@ -8,8 +8,8 @@ const registerUser = (data: RegisterUserData) => {
    return API.post("/auth/users/", data);
 };
 
-const getAllPosts = (offset:number, search?: string) => {
-   return API.get("/blog/posts/", {limit:PER_PAGE, offset, search});
+const getAllPosts = (offset:number, search?: string, ordering?: string) => {
+   return API.get("/blog/posts/", {limit:PER_PAGE, offset, search, ordering});
 };
 
 const activateUser = (data: ActivateUserData) => {

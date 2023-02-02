@@ -44,3 +44,19 @@
   cursor: pointer;
   color: #2231AA;
 }
+
+.ordering {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: flex-end;
+}
+
+.button {
+  color: #2231AA;
+  border-radius: 10px;
+}
+
+.buttonClicked {
+  border: 1px solid #2231AA;
+}

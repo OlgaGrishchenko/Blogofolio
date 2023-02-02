@@ -19,8 +19,9 @@ import API from "../utils/api";
 
 function* getPostsWorker(action: PayloadAction<GetPostsPayload>) {
   yield put(setPostsLoading(true))
-  const {offset, search} = action.payload;
-  const { ok, data, problem } = yield call(API.getAllPosts, offset, search);
+  const {offset, search, ordering} = action.payload;
+  
+  const { ok, data, problem } = yield call(API.getAllPosts, offset, search, ordering);
 
   if (ok && data) {
     yield put(setPosts(data.results));
