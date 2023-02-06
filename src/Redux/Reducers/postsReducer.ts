@@ -98,7 +98,7 @@ const postsSlice = createSlice({
             }
         },
 
-        getPosts: (state, action: PayloadAction<number>) => {},
+        getPosts: (state, action: PayloadAction<GetSearchedPostsPayload>) => {},
         setPosts: (state, action: PayloadAction<CardsListType>) => {state.allPosts = action.payload;
     },
         setPostsLoading: (state, action: PayloadAction<boolean>) => {

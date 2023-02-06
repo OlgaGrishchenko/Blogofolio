@@ -71,8 +71,7 @@ const Home = () => {
         if (activeTab === Tabs.MyPosts) {
             dispatch(getMyPosts());
         } else {
-            /*dispatch(getPosts({ offset, ordering }));*/
-            dispatch(getPosts(offset));
+            dispatch(getPosts({ offset, ordering, isOverwrite: true}));
         }
     }, [activeTab, currentPage, ordering]);
 
