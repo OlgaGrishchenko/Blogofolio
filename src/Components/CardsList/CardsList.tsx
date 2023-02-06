@@ -13,9 +13,10 @@ import EmptyState from "../EmptyState";
 
 type CardsListProps = {
   cardsList: CardsListType | null;
+  isSearch?: boolean;
 };
 
-const CardsList: FC<CardsListProps> = ({ cardsList }) => {
+const CardsList: FC<CardsListProps> = ({ cardsList, isSearch }) => {
 
   const { theme } = useThemeContext();
 
@@ -23,7 +24,9 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
     (
       <div className={classNames(styles.container, {
           [styles.darkContainer]: theme === Theme.Dark,
+          [styles.searchContainer]: isSearch,
       })}>
+        {!isSearch ? <>
         <div className={styles.leftSide}>
           <Card card={cardsList[0]} size={CardSize.Large} />
           <div className={styles.mediumContainer}>
@@ -40,7 +43,7 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
               return <Card key={index} card={card} size={CardSize.Small} />;
             }
           })}
-        </div>
+        </div> </> : cardsList.map(card => <Card key={card.id} card={card} size={CardSize.Search}/>) }
       </div>
     ): 
     <EmptyState />

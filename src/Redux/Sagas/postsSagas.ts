@@ -1,4 +1,4 @@
-import { GetPostsPayload } from './../Types/posts';
+import { GetSearchedPostsPayload } from './../Types/posts';
 import { all, call, takeLatest, put } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 import callCheckingAuth from "./callCheckingAuth";
@@ -13,15 +13,17 @@ import {
   setMyPosts,
   getMyPosts,
   setMyPostsLoading,
+  getSearchedPosts,
+  setSearchedPosts,
+  setSearchedPostsCount,
 } from "../Reducers/postsReducer";
 
 import API from "../utils/api";
 
-function* getPostsWorker(action: PayloadAction<GetPostsPayload>) {
+function* getPostsWorker(action: PayloadAction<number>) {
   yield put(setPostsLoading(true))
-  const {offset, search, ordering} = action.payload;
-  
-  const { ok, data, problem } = yield call(API.getAllPosts, offset, search, ordering);
+
+  const { ok, data, problem } = yield call(API.getAllPosts, action.payload);
 
   if (ok && data) {
     yield put(setPosts(data.results));
@@ -54,10 +56,26 @@ function* getMyPostsWorker (action: PayloadAction<undefined>) {
   yield put(setMyPostsLoading(false));
 }
 
+function* getSearchedPostsWorker(action: PayloadAction<GetSearchedPostsPayload>) {
+  yield put(setMyPostsLoading(true));
+  const { offset, search, isOverwrite } = action.payload;
+  const { ok, data, problem } = yield call(API.getAllPosts, offset, search);
+
+  if (ok && data) {
+    yield put(setSearchedPosts( {posts: data.results, isOverwrite} ));
+    
+    yield put(setSearchedPostsCount(data.count));
+  } else {
+    console.warn("Error fetching posts: ", problem);
+  }
+  yield put(setMyPostsLoading(false));
+}
+
 export default function* postsSaga() {
   yield all([
     takeLatest(getPosts, getPostsWorker),
     takeLatest(getSinglePost, getSinglePostWorker),
     takeLatest(getMyPosts, getMyPostsWorker),
+    takeLatest(getSearchedPosts, getSearchedPostsWorker),
   ]);
 }

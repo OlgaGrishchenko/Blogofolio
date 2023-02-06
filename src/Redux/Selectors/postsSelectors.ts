@@ -12,4 +12,6 @@ export default {
   getTotalCount: (state: RootState) => state.postsReducer.totalCount,
   getPostsLoading: (state: RootState) => state.postsReducer.isPostLoading,
   getMyPostsLoading: (state: RootState) => state.postsReducer.isMyPostsLoading,
+  getSearchedTotalCount: (state: RootState) => state.postsReducer.searchedTotalCount,
+  getSearchedPosts: (state: RootState) => state.postsReducer.searchedPosts,
 };

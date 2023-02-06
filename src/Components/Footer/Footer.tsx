@@ -1,20 +1,21 @@
 import React from "react";
-
-import styles from "./Footer.module.css"
+import styles from "./Footer.module.css";
 import { useThemeContext } from "../../Context/Theme";
-import { Theme } from "../../Constants/@types";
 import classNames from "classnames";
+import { Theme } from "../../Constants/@types";
 
 const Footer = () => {
+   
    const { theme } = useThemeContext();
+
    return (
-      <div className={classNames(styles.container, {
+      <div
+         className={classNames(styles.container, {
          [styles.darkContainer]: theme === Theme.Dark,
-      })}>
-      <div className={styles.footer}>
-            <div>©2022 Blogfolio</div>
-            <div>All rights reserved</div>
-      </div>
+         })}
+      >
+         <div>©2022 Blogfolio</div>
+         <div>All rights reserved</div>
       </div>
    );
 };

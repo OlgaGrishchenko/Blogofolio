@@ -19,6 +19,7 @@ export enum CardSize {
    Large = "large",
    Medium = "medium",
    Small = "small",
+   Search = "search",
 }
 
 type CardProps = {
@@ -49,6 +50,7 @@ const Card: FC<CardProps> = ({ card, size, isFromModal }) => {
    const isLarge = size === CardSize.Large;
    const isMedium = size === CardSize.Medium;
    const isSmall = size === CardSize.Small;
+   const isSearch = size === CardSize.Search;
 
    const onSettingClick = () => {
       dispatch(setSelectedPost(card));
@@ -73,12 +75,14 @@ const Card: FC<CardProps> = ({ card, size, isFromModal }) => {
             className={classNames(styles.container, {
                 [styles.mediumContainer]: isMedium, // [styles.mediumContainer]: size === CardSize.Medium
                [styles.smallContainer]: isSmall,
+               [styles.searchContainer]: isSearch,
             })}
       >
             <div
                className={classNames(styles.bodyContainer, {
                   [styles.mediumBodyContainer]: isMedium,
                   [styles.smallBodyContainer]: isSmall,
+                  [styles.searchBodyContainer]: isSearch
                })}
             >
                <div className={styles.infoContainer}>
@@ -105,7 +109,7 @@ const Card: FC<CardProps> = ({ card, size, isFromModal }) => {
                   alt={"image"}
                   className={classNames(styles.image, {
                      [styles.mediumImage]: isMedium,
-                     [styles.smallImage]: isSmall,
+                     [styles.smallImage]: isSmall || isSearch,
                   })}
                   onClick={isFromModal ? onImageClick : undefined}
                />

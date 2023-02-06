@@ -24,3 +24,7 @@
 .darkContainer {
    background: #313037;
 }
+
+.searchContainer {
+   flex-direction: column;
+}

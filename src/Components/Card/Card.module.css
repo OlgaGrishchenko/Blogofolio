@@ -13,6 +13,7 @@
 .bodyContainer {
     display: flex;
     gap: 32px;
+    justify-content: space-between;
 }
 
 .infoContainer {
@@ -112,4 +113,14 @@ fill: #dadada;
 .smallImage {
     width: 96px;
     height: 96px;
+}
+
+.searchContainer {
+    height: 208px;
+    max-width: unset;
+}
+
+.searchBodyContainer {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
 }

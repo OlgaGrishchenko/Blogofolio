@@ -5,7 +5,7 @@ import {
     LikeStatus,
     SetLikeStatusPayload,
 } from "../../Constants/@types";
-import {GetPostsPayload} from "../Types/posts"
+import {GetSearchedPostsPayload, SetPostsPayload} from "../Types/posts"
 
 type PostsReducerState = {
     selectedPost: CardType | null;
@@ -19,6 +19,8 @@ type PostsReducerState = {
     myPosts: CardsListType;
     isMyPostsLoading: boolean;
     totalCount: number;
+    searchedPosts: CardsListType;
+    searchedTotalCount: number;
 };
 
 const initialState: PostsReducerState = {
@@ -33,6 +35,8 @@ const initialState: PostsReducerState = {
     myPosts: [],
     isMyPostsLoading: false,
     totalCount: 0,
+    searchedPosts: [],
+    searchedTotalCount: 0,
 };
 
 const postsSlice = createSlice({
@@ -94,7 +98,7 @@ const postsSlice = createSlice({
             }
         },
 
-        getPosts: (state, action: PayloadAction<GetPostsPayload>) => {},
+        getPosts: (state, action: PayloadAction<number>) => {},
         setPosts: (state, action: PayloadAction<CardsListType>) => {state.allPosts = action.payload;
     },
         setPostsLoading: (state, action: PayloadAction<boolean>) => {
@@ -114,9 +118,18 @@ const postsSlice = createSlice({
             state.isMyPostsLoading = action.payload;
         },
 
-        setTotalCount: (state, action:PayloadAction<number>) => {state.totalCount = action.payload;},
+        setTotalCount: (state, action: PayloadAction<number>) => {state.totalCount = action.payload;},
         
-
+        getSearchedPosts: (state, action: PayloadAction<GetSearchedPostsPayload>) => {},
+        setSearchedPosts: (state, action:PayloadAction<SetPostsPayload>) => {
+            const { isOverwrite, posts } = action.payload;
+            if (isOverwrite) {
+                state.searchedPosts = posts
+            } else {
+                state.searchedPosts = [...state.searchedPosts, ...posts];
+            }
+        },
+        setSearchedPostsCount: (state, action: PayloadAction<number>) => {state.searchedTotalCount = action.payload;},
     }
 });
 
@@ -134,6 +147,9 @@ const postsSlice = createSlice({
         getMyPosts,
         setMyPosts,
         setMyPostsLoading,
+        getSearchedPosts,
+        setSearchedPosts,
+        setSearchedPostsCount,
     } = postsSlice.actions;
 
     const postsReducer = postsSlice.reducer;

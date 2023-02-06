@@ -67,10 +67,12 @@ const Home = () => {
 
     useEffect(() => {
         const offset = PER_PAGE * (currentPage - 1)
+        
         if (activeTab === Tabs.MyPosts) {
             dispatch(getMyPosts());
         } else {
-            dispatch(getPosts({ offset, ordering }));
+            /*dispatch(getPosts({ offset, ordering }));*/
+            dispatch(getPosts(offset));
         }
     }, [activeTab, currentPage, ordering]);
 

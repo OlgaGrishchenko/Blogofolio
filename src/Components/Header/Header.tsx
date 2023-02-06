@@ -13,30 +13,35 @@ import Input from "../Input";
 import UserName from "../UserName";
 import styles from "./Header.module.css";
 import Menu from "./Menu";
+import { useDispatch } from "react-redux";
+import { getSearchedPosts } from "../../Redux/Reducers/postsReducer";
+import { getValue } from "@testing-library/user-event/dist/utils";
 
 const Header = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const [isOpened, setOpened] = useState(false);
+    const [isClicked, setClicked] = useState(false);
+    const [search, setSearch] = useState("");
+
+    const isLoggedIn = false;
 
     const onBurgerClick = () => {
         setOpened(!isOpened);
     };
 
-    const [isClicked, setClicked] = useState(false);
-
-    const [search, setSearch] = useState("");
-
-    const navigate = useNavigate();
     const onLogInButton = () => {
         navigate(PathNames.SignIn);
     };
 
-    const isLoggedIn = false;
-
     const onSearchClick = () => {
         if (isClicked) {
+            dispatch(getSearchedPosts( {offset: 0, search, isOverwrite: true } ))
             navigate(`search/${search}`);
         }
         setClicked(!isClicked);
+        setSearch("");
     };
 
     return (
