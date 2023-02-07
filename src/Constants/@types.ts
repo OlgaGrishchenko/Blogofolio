@@ -36,3 +36,8 @@ export enum Order {
   Date = "date",
   Title = "title",
 }
+
+export type AddNewPostPayload = {
+  formData: any;
+  callback: () => void;
+};

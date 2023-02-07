@@ -48,6 +48,15 @@ const getMyPosts = (token: string) => {
    );
 };
 
+const addNewPost = (token: string, formData: any) => {
+   return API.post("/blog/posts/", formData, {
+      headers: {
+         Authorization: `Bearer ${token}`,
+         'Content-Type': 'multipart/form-data'
+      },
+   });
+};
+
 export default {
    registerUser,
    getAllPosts,
@@ -58,4 +67,5 @@ export default {
    getNewAccessToken,
    verifyToken,
    getMyPosts,
+   addNewPost,
 };

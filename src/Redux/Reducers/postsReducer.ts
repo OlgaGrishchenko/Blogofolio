@@ -4,6 +4,7 @@ import {
     CardType,
     LikeStatus,
     SetLikeStatusPayload,
+    AddNewPostPayload,
 } from "../../Constants/@types";
 import {GetSearchedPostsPayload, SetPostsPayload} from "../Types/posts"
 
@@ -130,6 +131,8 @@ const postsSlice = createSlice({
             }
         },
         setSearchedPostsCount: (state, action: PayloadAction<number>) => {state.searchedTotalCount = action.payload;},
+
+        addNewPost: (state, action: PayloadAction<AddNewPostPayload>) => {}
     }
 });
 
@@ -150,6 +153,7 @@ const postsSlice = createSlice({
         getSearchedPosts,
         setSearchedPosts,
         setSearchedPostsCount,
+        addNewPost,
     } = postsSlice.actions;
 
     const postsReducer = postsSlice.reducer;

@@ -16,9 +16,11 @@ import {
   getSearchedPosts,
   setSearchedPosts,
   setSearchedPostsCount,
+  addNewPost,
 } from "../Reducers/postsReducer";
 
 import API from "../utils/api";
+import { AddNewPostPayload } from '../../Constants/@types';
 
 function* getPostsWorker(action: PayloadAction<GetSearchedPostsPayload>) {
   yield put(setPostsLoading(true))
@@ -71,11 +73,22 @@ function* getSearchedPostsWorker(action: PayloadAction<GetSearchedPostsPayload>)
   yield put(setMyPostsLoading(false));
 }
 
+function* addNewPostWorker(action: PayloadAction<AddNewPostPayload>) {
+  const { callback, formData } = action.payload;
+  const { ok, problem } = yield callCheckingAuth(API.addNewPost, formData);
+  if (ok) {
+    callback();
+  } else {
+    console.warn("Error adding new post", problem);
+  }
+}
+
 export default function* postsSaga() {
   yield all([
     takeLatest(getPosts, getPostsWorker),
     takeLatest(getSinglePost, getSinglePostWorker),
     takeLatest(getMyPosts, getMyPostsWorker),
     takeLatest(getSearchedPosts, getSearchedPostsWorker),
+    takeLatest(addNewPost, addNewPostWorker),
   ]);
 }

@@ -11,6 +11,7 @@ import Success from "../Success";
 import PagesWrapper from "../PagesWrapper";
 import ContentPage from "../ContentPage";
 import SearchPage from "../SearchPage";
+import PostFormPage from "../PostFormPage";
 
 import AuthSelectors from "../../Redux/Selectors/authSelectors";
 import { getUserData } from "../../Redux/Reducers/authReducer";
@@ -28,10 +29,6 @@ export enum PathNames {
    ContentPage = "/content/:id",
    ActivateUser = "/activate/:uid/:token",
 }
-
-const MockPage = () => {
-   return <div>{"Mock Page"}</div>;
-};
 
 const Router = () => {
 
@@ -61,7 +58,7 @@ const Router = () => {
                <Route
                   path={PathNames.AddPost}
                   element={
-                  isLoggedIn ? <MockPage /> : <Navigate to={PathNames.SignIn} />
+                  isLoggedIn ? <PostFormPage /> : <Navigate to={PathNames.SignIn} />
                   }
                />
 
