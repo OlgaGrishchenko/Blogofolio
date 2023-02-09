@@ -1,6 +1,7 @@
 import React, { FC, ChangeEvent } from "react";
 
-import styles from "./Input.module.css";
+import styles from "./TextArea.module.css";
+import classNames from "classnames";
 
 type TextAreaProps = {
    title?: string;
@@ -11,6 +12,7 @@ type TextAreaProps = {
    rows: number;
    cols: number;
    autofocus?: boolean;
+   className?: string;
 };
 
 const Textarea: FC<TextAreaProps> = ({
@@ -20,12 +22,15 @@ const Textarea: FC<TextAreaProps> = ({
    disabled,
    rows,
    cols,
-   title
+   title,
+   className
 }) => {
    const onChangeTextarea = (event: ChangeEvent<HTMLTextAreaElement>) => {
       onChange(event.target.value);
    };
    return (
+      <div>
+         {title && <div className={styles.title}>{title}</div>}
       <textarea
             title={title}
             value={value}
@@ -34,7 +39,9 @@ const Textarea: FC<TextAreaProps> = ({
             disabled={disabled}
             rows={rows}
             cols={cols}
+            className={classNames(className, styles.textarea)}
       />
+      </div>
    );
 };
 

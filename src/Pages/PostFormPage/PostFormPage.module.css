@@ -6,7 +6,6 @@
    flex-direction: column;
    margin: 0 auto;
    margin-bottom: 40px;
-   
 }
 
 .pageTitle {
@@ -46,7 +45,6 @@
 }
 
 .imageDragNDrop {
-   
    height: 300px;
    width: 100%;
    display: flex;
