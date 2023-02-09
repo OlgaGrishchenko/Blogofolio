@@ -10,6 +10,7 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { PathNames } from "../Router/Router";
 import postsSelectors from "../../Redux/Selectors/postsSelectors";
+import AuthSelectors from "../../Redux/Selectors/authSelectors";
 import { getSinglePost } from "../../Redux/Reducers/postsReducer";
 
 import styles from "./ContentPage.module.css";
@@ -24,6 +25,10 @@ const ContentPage = () => {
     const params = useParams();
     const { id } = params;
 
+    const onEditPost = () => {
+        navigate(`/content/${id}/edit`)
+    }
+
     useEffect(() => {
         if (id) {
             dispatch(getSinglePost(id));
@@ -31,13 +36,15 @@ const ContentPage = () => {
     }, []);
 
     const card = useSelector(postsSelectors.getSinglePost);
+    const userId = useSelector(AuthSelectors.getUserId)
+
     return card ? (
         <div className={styles.container}>
 
             <div>
                 <div className={styles.headerContainer}>
                     <div className={styles.homeLink}>
-                       <NavLink to={PathNames.Home} className={styles.goBackButton}>{"Home"}</NavLink>
+                        <NavLink to={PathNames.Home} className={styles.goBackButton}>{"Home"}</NavLink>
                     </div>
                     <span>|</span>
                     <div className={styles.post}>{"Post 14278"}</div>
@@ -54,6 +61,9 @@ const ContentPage = () => {
 
             <div className={styles.buttonContainer}>
                 <div className={styles.likeContainer}>
+                    {card.author === userId && (
+                        <Button title={"EditPost"} type={ButtonTypes.Primary} onClick={onEditPost}/>
+                    )}
                     <Button title={<LikeIcon />} type={ButtonTypes.Secondary} />
                     <Button
                         title={<DislikeIcon />}

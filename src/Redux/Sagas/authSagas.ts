@@ -6,6 +6,7 @@ import { RegisterUserPayload, ActivateUserPayload, SignInUserPayload } from "../
 import API from "../utils/api";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../../Constants/consts";
 import callCheckingAuth from "./callCheckingAuth";
+import { ApiResponse } from "apisauce";
 
 function* registerUserWorker(action: PayloadAction<RegisterUserPayload>) {
   const { data: registerData, callback } = action.payload;
@@ -42,16 +43,19 @@ function* signInUserWorker(action: PayloadAction<SignInUserPayload>) {
 }
 
 function* getUserDataWorker() {
-  const { ok, problem, data } = yield callCheckingAuth(API.getUserInfo);
-  if (ok && data) {
-    yield put(setUserData(data.username));
+  const response: ApiResponse<any> = yield callCheckingAuth(API.getUserInfo);
+  if (response?.status === 200 && response?.data) {
+    yield put(
+      setUserData({ userName: response?.data.username, id: response?.data.id })
+    );
   } else {
-    console.warn("Error while getting user info: ", problem);
+    console.warn("Error while getting user info: ", response?.problem);
   }
 }
 
 function* logoutUserWorker() {
   yield put(setLoggedIn(false));
+  yield put(setUserData({ id: null, userName: "" }));
   localStorage.removeItem(ACCESS_TOKEN_KEY)
   localStorage.removeItem(REFRESH_TOKEN_KEY)
 }

@@ -17,10 +17,11 @@ import {
   setSearchedPosts,
   setSearchedPostsCount,
   addNewPost,
+  editPost,
 } from "../Reducers/postsReducer";
 
 import API from "../utils/api";
-import { AddNewPostPayload } from '../../Constants/@types';
+import { IAddNewPostPayload, IEditPostPayload } from '../../Constants/@types';
 
 function* getPostsWorker(action: PayloadAction<GetSearchedPostsPayload>) {
   yield put(setPostsLoading(true))
@@ -73,13 +74,23 @@ function* getSearchedPostsWorker(action: PayloadAction<GetSearchedPostsPayload>)
   yield put(setMyPostsLoading(false));
 }
 
-function* addNewPostWorker(action: PayloadAction<AddNewPostPayload>) {
+function* addNewPostWorker(action: PayloadAction<IAddNewPostPayload>) {
   const { callback, formData } = action.payload;
   const { ok, problem } = yield callCheckingAuth(API.addNewPost, formData);
   if (ok) {
     callback();
   } else {
     console.warn("Error adding new post", problem);
+  }
+}
+
+function* editPostWorker(action: PayloadAction<IEditPostPayload>) {
+  const { callback, formData, id } = action.payload;
+  const { ok, problem } = yield callCheckingAuth(API.editPost, formData, id);
+  if (ok) {
+    callback();
+  } else {
+    console.warn("Error editing post", problem);
   }
 }
 
@@ -90,5 +101,6 @@ export default function* postsSaga() {
     takeLatest(getMyPosts, getMyPostsWorker),
     takeLatest(getSearchedPosts, getSearchedPostsWorker),
     takeLatest(addNewPost, addNewPostWorker),
+    takeLatest(editPost, editPostWorker),
   ]);
 }

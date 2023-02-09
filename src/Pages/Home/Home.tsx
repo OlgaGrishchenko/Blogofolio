@@ -30,10 +30,10 @@ const Home = () => {
 
     const onClickOrdering = (order: Order) => () => {
         if (ordering === order) {
-          setOrdering("");
+            setOrdering("");
         } else setOrdering(order);
         setCurrentPage(1);
-      };
+    };
 
     const [currentPage, setCurrentPage] = useState(1);
 

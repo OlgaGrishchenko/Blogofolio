@@ -27,6 +27,7 @@ export enum PathNames {
    ResetPassword = "/reset-password",
    Search = "/search/:searchString",
    ContentPage = "/content/:id",
+   EditPost = "/content/:id/edit",
    ActivateUser = "/activate/:uid/:token",
 }
 
@@ -57,6 +58,13 @@ const Router = () => {
 
                <Route
                   path={PathNames.AddPost}
+                  element={
+                  isLoggedIn ? <PostFormPage /> : <Navigate to={PathNames.SignIn} />
+                  }
+               />
+
+               <Route
+                  path={PathNames.EditPost}
                   element={
                   isLoggedIn ? <PostFormPage /> : <Navigate to={PathNames.SignIn} />
                   }

@@ -57,6 +57,15 @@ const addNewPost = (token: string, formData: any) => {
    });
 };
 
+const editPost = (token: string, formData: any, id: string) => {
+   return API.put(`/blog/posts/${id}/`, formData, {
+      headers: {
+         Authorization: `Bearer ${token}`,
+         "Content-Type": "multipart/form-data",
+      },
+});
+};
+
 export default {
    registerUser,
    getAllPosts,
@@ -68,4 +77,5 @@ export default {
    verifyToken,
    getMyPosts,
    addNewPost,
+   editPost,
 };

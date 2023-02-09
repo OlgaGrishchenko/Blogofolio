@@ -2,9 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
     CardsListType,
     CardType,
+    IAddNewPostPayload,
+    IEditPostPayload,
     LikeStatus,
     SetLikeStatusPayload,
-    AddNewPostPayload,
 } from "../../Constants/@types";
 import {GetSearchedPostsPayload, SetPostsPayload} from "../Types/posts"
 
@@ -132,7 +133,9 @@ const postsSlice = createSlice({
         },
         setSearchedPostsCount: (state, action: PayloadAction<number>) => {state.searchedTotalCount = action.payload;},
 
-        addNewPost: (state, action: PayloadAction<AddNewPostPayload>) => {}
+        addNewPost: (state, action: PayloadAction<IAddNewPostPayload>) => {},
+        editPost: (state, action: PayloadAction<IEditPostPayload>) => {},
+
     }
 });
 
@@ -154,6 +157,7 @@ const postsSlice = createSlice({
         setSearchedPosts,
         setSearchedPostsCount,
         addNewPost,
+        editPost,
     } = postsSlice.actions;
 
     const postsReducer = postsSlice.reducer;

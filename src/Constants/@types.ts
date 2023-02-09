@@ -6,6 +6,7 @@ export type CardType = {
   lesson_num: number;
   title: string;
   author: number;
+  description: string;
 };
 
 export type CardsListType = Array<CardType>;
@@ -37,7 +38,11 @@ export enum Order {
   Title = "title",
 }
 
-export type AddNewPostPayload = {
+export interface IAddNewPostPayload {
   formData: any;
   callback: () => void;
 };
+
+export interface IEditPostPayload extends IAddNewPostPayload {
+  id: string;
+}
