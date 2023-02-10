@@ -18,10 +18,11 @@ import {
   setSearchedPostsCount,
   addNewPost,
   editPost,
+  deletePost,
 } from "../Reducers/postsReducer";
 
 import API from "../utils/api";
-import { IAddNewPostPayload, IEditPostPayload } from '../../Constants/@types';
+import { IAddNewPostPayload, IDeletePostPayload, IEditPostPayload } from '../../Constants/@types';
 
 function* getPostsWorker(action: PayloadAction<GetSearchedPostsPayload>) {
   yield put(setPostsLoading(true))
@@ -94,6 +95,16 @@ function* editPostWorker(action: PayloadAction<IEditPostPayload>) {
   }
 }
 
+function* deletePostWorker(action: PayloadAction<IDeletePostPayload>) {
+  const { callback, id } = action.payload;
+  const { ok, problem } = yield callCheckingAuth(API.deletePost, id);
+  if (ok) {
+    callback();
+  } else {
+    console.warn("Error deleting post", problem);
+  }
+}
+
 export default function* postsSaga() {
   yield all([
     takeLatest(getPosts, getPostsWorker),
@@ -102,5 +113,6 @@ export default function* postsSaga() {
     takeLatest(getSearchedPosts, getSearchedPostsWorker),
     takeLatest(addNewPost, addNewPostWorker),
     takeLatest(editPost, editPostWorker),
+    takeLatest(deletePost, deletePostWorker),
   ]);
 }

@@ -8,11 +8,12 @@ import Input from "../../Components/Input";
 import Button, { ButtonTypes } from "../../Components/Button";
 
 import styles from "./PostFormPage.module.css";
-import { addNewPost, getSinglePost, editPost } from "../../Redux/Reducers/postsReducer";
+import { addNewPost, getSinglePost, editPost, deletePost } from "../../Redux/Reducers/postsReducer";
 import { PathNames } from "../Router/Router";
 import postsSelectors from "../../Redux/Selectors/postsSelectors";
 import AuthSelectors from "../../Redux/Selectors/authSelectors";
 import TextArea from "../../Components/TextArea";
+import ConfirmationModal from "./ConfirmationModal";
 
 const PostFormPage = () => {
    const dispatch = useDispatch();
@@ -27,7 +28,8 @@ const PostFormPage = () => {
    const [lessonNumber, setLessonNumber] = useState("");
    const [text, setText] = useState("");
    const [description, setDescription] = useState("");
-   const [images, setImages] = React.useState<ImageListType>([]); 
+   const [images, setImages] = React.useState<ImageListType>([]);
+   const [isOpen, setOpen] = useState(false);
 
    const isEdit = !!id;
 
@@ -67,6 +69,8 @@ const PostFormPage = () => {
       );
    }, [title, lessonNumber, text, images, description]);
 
+   const navigateToHome = () => navigate(PathNames.Home);
+
    const onSave = () => {
       const formData = new FormData();
       formData.append("title", title);
@@ -77,19 +81,26 @@ const PostFormPage = () => {
 
       if (isEdit && userId) {
          formData.append("author", userId.toString());
-         dispatch(
-            editPost({ formData, callback: () => navigate(PathNames.Home), id })
-         );
+            dispatch(editPost({ formData, callback: navigateToHome, id }));
          } else {
-         dispatch(
-            addNewPost({ formData, callback: () => navigate(PathNames.Home) })
-         );
+            dispatch(addNewPost({ formData, callback: navigateToHome }));
       }
    };
 
    //if (isEdit && card && card.author !== userId) {
    //   return <Navigate to={PathNames.SignIn} />;
    //}
+
+   const handleModalVisibility = () => {
+      setOpen(!isOpen);
+   };
+
+   const onDeletePost = () => {
+      if (id) {
+         dispatch(deletePost({ id, callback: navigateToHome }));
+      }
+      handleModalVisibility();
+   };
    
    return (
       <div className={styles.container}>
@@ -186,9 +197,9 @@ const PostFormPage = () => {
          />
       <div className={styles.buttonsContainer}>
          <Button
-            disabled
+            disabled={!isEdit}
             type={ButtonTypes.Error}
-            onClick={() => {}}
+            onClick={handleModalVisibility}
             title={"Delete Post"}
          />
          <div className={styles.successButtons}>
@@ -205,6 +216,11 @@ const PostFormPage = () => {
             />
          </div>
       </div>
+      <ConfirmationModal
+         isOpen={isOpen}
+         onClose={handleModalVisibility}
+         onSubmit={onDeletePost}
+      />
    </div>
    );
 };

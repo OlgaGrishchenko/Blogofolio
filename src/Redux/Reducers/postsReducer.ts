@@ -4,6 +4,7 @@ import {
     CardType,
     IAddNewPostPayload,
     IEditPostPayload,
+    IDeletePostPayload,
     LikeStatus,
     SetLikeStatusPayload,
 } from "../../Constants/@types";
@@ -135,6 +136,7 @@ const postsSlice = createSlice({
 
         addNewPost: (state, action: PayloadAction<IAddNewPostPayload>) => {},
         editPost: (state, action: PayloadAction<IEditPostPayload>) => {},
+        deletePost: (state, action: PayloadAction<IDeletePostPayload>) => {},
 
     }
 });
@@ -158,6 +160,7 @@ const postsSlice = createSlice({
         setSearchedPostsCount,
         addNewPost,
         editPost,
+        deletePost,
     } = postsSlice.actions;
 
     const postsReducer = postsSlice.reducer;

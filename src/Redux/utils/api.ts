@@ -66,6 +66,18 @@ const editPost = (token: string, formData: any, id: string) => {
 });
 };
 
+const deletePost = (token: string, id: string) => {
+   return API.delete(
+      `/blog/posts/${id}/`,
+      {},
+      {
+         headers: {
+         Authorization: `Bearer ${token}`,
+         },
+      }
+   );
+};
+
 export default {
    registerUser,
    getAllPosts,
@@ -78,4 +90,5 @@ export default {
    getMyPosts,
    addNewPost,
    editPost,
+   deletePost,
 };
