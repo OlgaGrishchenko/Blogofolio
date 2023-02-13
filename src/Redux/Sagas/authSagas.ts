@@ -7,6 +7,7 @@ import API from "../utils/api";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../../Constants/consts";
 import callCheckingAuth from "./callCheckingAuth";
 import { ApiResponse } from "apisauce";
+import { toast } from "react-toastify";
 
 function* registerUserWorker(action: PayloadAction<RegisterUserPayload>) {
   const { data: registerData, callback } = action.payload;
@@ -16,6 +17,7 @@ function* registerUserWorker(action: PayloadAction<RegisterUserPayload>) {
     callback();
   } else {
     console.warn("Error while registering user: ", problem);
+    toast.error("Error while registering");
   }
 }
 
@@ -39,6 +41,7 @@ function* signInUserWorker(action: PayloadAction<SignInUserPayload>) {
     callback();
   } else {
     console.warn("Error while sign in: ", problem);
+    toast.error("Error while sign in");
   }
 }
 
@@ -50,6 +53,7 @@ function* getUserDataWorker() {
     );
   } else {
     console.warn("Error while getting user info: ", response?.problem);
+    toast.error("Error while getting user info");
   }
 }
 

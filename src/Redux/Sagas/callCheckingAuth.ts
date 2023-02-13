@@ -1,5 +1,6 @@
 import { call, put } from "redux-saga/effects";
 import { ApiResponse } from "apisauce";
+import { toast } from "react-toastify";
 
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../../Constants/consts";
 import API from "../utils/api";
@@ -40,17 +41,19 @@ export default function* callCheckingAuth(api: any, ...rest: any) {
                      const newResponse: AnyResponse = yield call(
                         api,
                         newAccessToken,
-                  ...rest
+                        ...rest
                         ); // делаем запрос с НОВЫМ значением токена
                            return newResponse; //ОБЯЗАТЕЛЬНО возвращаем его пользователю
                } else {
                   // если совсем все плохо - просто выносим пользователя из приложения - пускай перезаходит сам
                   yield put(logoutUser());
+                  toast.error("Your session has expired, please log in");
                }
 
             } else {
                   //если умер и refreshToken - выкидываем пользователя из приложения
                   yield put(logoutUser());
+                  toast.error("Your session has expired, please log in");
             }
 
       } else {

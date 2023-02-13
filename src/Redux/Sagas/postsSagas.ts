@@ -2,6 +2,7 @@ import { GetSearchedPostsPayload } from './../Types/posts';
 import { all, call, takeLatest, put } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 import callCheckingAuth from "./callCheckingAuth";
+import { toast } from "react-toastify";
 
 import { 
   getPosts,
@@ -34,6 +35,7 @@ function* getPostsWorker(action: PayloadAction<GetSearchedPostsPayload>) {
     yield put(setTotalCount(data.count));
   } else {
     console.warn("Error fetching posts: ", problem);
+    toast.error("Error fetching posts");
   }
   yield put(setPostsLoading(false))
 }
@@ -44,6 +46,7 @@ function* getSinglePostWorker(action: PayloadAction<string>) {
     yield put(setSinglePost(data));
   } else {
     console.warn("Error fetching single post: ", problem);
+    toast.error("Error fetching post");
   }
 }
 
@@ -80,8 +83,10 @@ function* addNewPostWorker(action: PayloadAction<IAddNewPostPayload>) {
   const { ok, problem } = yield callCheckingAuth(API.addNewPost, formData);
   if (ok) {
     callback();
+    toast.success("Post added successfully");
   } else {
     console.warn("Error adding new post", problem);
+    toast.error("Error adding new post");
   }
 }
 
@@ -90,8 +95,10 @@ function* editPostWorker(action: PayloadAction<IEditPostPayload>) {
   const { ok, problem } = yield callCheckingAuth(API.editPost, formData, id);
   if (ok) {
     callback();
+    toast.success("Post edited successfully");
   } else {
     console.warn("Error editing post", problem);
+    toast.error("Error editing post");
   }
 }
 
@@ -100,8 +107,10 @@ function* deletePostWorker(action: PayloadAction<IDeletePostPayload>) {
   const { ok, problem } = yield callCheckingAuth(API.deletePost, id);
   if (ok) {
     callback();
+    toast.success("Post deleted successfully");
   } else {
     console.warn("Error deleting post", problem);
+    toast.error("Error deleting post");
   }
 }
 

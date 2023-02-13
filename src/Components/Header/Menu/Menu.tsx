@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 import ThemeSwitcher from "../../ThemeSwitcher";
@@ -11,7 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import authSelectors from "../../../Redux/Selectors/authSelectors";
 import { logoutUser } from "../../../Redux/Reducers/authReducer";
 
-const Menu = () => {
+type MenuProps = {
+  onClose: () => void;
+};
+
+const Menu: FC<MenuProps> = ({ onClose }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(authSelectors.getLoggedIn);
   const username = useSelector(authSelectors.getUserName);
@@ -33,6 +37,7 @@ const Menu = () => {
     } else {
       navigate(PathNames.SignIn);
     }
+    onClose();
   };
 
   return (
@@ -47,6 +52,7 @@ const Menu = () => {
               className={classNames(styles.navButton, {
                 [styles.activeNavButton]: pathname === link,
               })}
+              onClick={onClose}
             >
               {title}
             </NavLink>

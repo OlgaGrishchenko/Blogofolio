@@ -52,7 +52,7 @@ const Header = () => {
                 type={ButtonTypes.Primary}
                 className={styles.burgerButton}
             />
-            {isOpened && <Menu />}
+            {isOpened && <Menu onClose={onBurgerClick} />}
 
             <div className={styles.headerLine}>
                 <div className={styles.inputContainer}>
