@@ -1,6 +1,12 @@
 import { ACCESS_TOKEN_KEY } from '../../Constants/consts';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RegisterUserPayload, ActivateUserPayload, SignInUserPayload, SetUserDataPayload } from "../Types/auth";
+import { 
+  RegisterUserPayload,
+  ActivateUserPayload,
+  SignInUserPayload,
+  SetUserDataPayload,
+  SendResetEmailPayload,
+  resetPasswordConfirmPayload } from "../Types/auth";
 
 type AuthState = {
   isLoggedIn: boolean
@@ -30,7 +36,9 @@ const authSlice = createSlice({
       state.userName = userName;
       state.userId = id;
     },
-    logoutUser: (state, action: PayloadAction<undefined>) => {}
+    logoutUser: (state, action: PayloadAction<undefined>) => {},
+    sendResetEmail: (state, action: PayloadAction<SendResetEmailPayload>) => {},
+    resetPasswordConfirm: (state, action: PayloadAction<resetPasswordConfirmPayload>) => {},
   },
 });
 
@@ -43,6 +51,8 @@ export const {
   getUserData,
   setUserData,
   logoutUser,
+  sendResetEmail,
+  resetPasswordConfirm,
 } = authSlice.actions;
 
 export default authSlice.reducer;

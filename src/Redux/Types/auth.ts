@@ -36,3 +36,16 @@ export type SetUserDataPayload = {
    userName: string;
    id: number | null;
 };
+
+export type SendResetEmailPayload = {
+   email: string;
+   callback: () => void;
+}
+
+export type ResetPasswordConfirmData = {
+   uid: string;
+   token: string;
+   new_password: string;
+}
+
+export type resetPasswordConfirmPayload = GeneralDataWithCallback<ResetPasswordConfirmData>;

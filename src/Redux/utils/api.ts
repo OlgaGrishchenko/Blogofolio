@@ -1,3 +1,5 @@
+import { resetPasswordConfirmPayload, ResetPasswordConfirmData } from './../Types/auth';
+import { SetPostsPayload } from './../Types/posts';
 import { PER_PAGE } from '../../Constants/consts';
 import { create } from "apisauce";
 import { RegisterUserData, ActivateUserData, SignInUserData } from "../Types/auth";
@@ -78,6 +80,20 @@ const deletePost = (token: string, id: string) => {
    );
 };
 
+const sendResetEmail = (email: string) => {
+   return API.post(
+      "/auth/users/reset_password/",
+      {email}
+   )
+}
+
+const resetPasswordConfirm = ( data: ResetPasswordConfirmData) => {
+   return API.post(
+      "/auth/users/reset_password_confirm/",
+      {data}
+   )
+}
+
 export default {
    registerUser,
    getAllPosts,
@@ -91,4 +107,6 @@ export default {
    addNewPost,
    editPost,
    deletePost,
+   sendResetEmail,
+   resetPasswordConfirm,
 };

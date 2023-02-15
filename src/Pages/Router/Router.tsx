@@ -24,7 +24,8 @@ export enum PathNames {
    RegistrationConfirmation = "/sign-up/confirm",
    RegistrationSuccess = "/sign-up/success",
    NewPassword = "/new-password",
-   ResetPassword = "/reset-password",
+   ResetPassword = "/password/reset",
+   ResetPasswordConfirm = "/password/reset/confirm/:uid/:token",
    Search = "/search/:searchString",
    ContentPage = "/content/:id",
    EditPost = "/content/:id/edit",
@@ -51,6 +52,7 @@ const Router = () => {
                <Route path={PathNames.NewPassword} element={<NewPassword />} />
                <Route path={PathNames.RegistrationConfirmation} element={<RegistrationConfirmation />} />
                <Route path={PathNames.ResetPassword} element={<ResetPassword />} />
+               <Route path={PathNames.ResetPasswordConfirm} element={<NewPassword />} />
 
                <Route path={PathNames.ActivateUser} element={<Success />} />
 

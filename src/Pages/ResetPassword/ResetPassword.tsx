@@ -8,35 +8,39 @@ import { Theme } from "../../Constants/@types";
 
 //@ts-ignore
 import styles from "./ResetPassword.module.css";
+import { sendResetEmail } from "../../Redux/Reducers/authReducer";
+import { useDispatch } from "react-redux";
 
 const ResetPassword = () => {
 
+   const dispatch = useDispatch();
    const { theme } = useThemeContext();
 
-   const [login, setLogin] = useState('')
+   const [email, setEmail] = useState('');
+   const [isSent, setSent] = useState(false);
 
    const inputRef = useRef<HTMLInputElement>(null);
 
+   const OnSend = () => {
+      dispatch(sendResetEmail( { email, callback: () => setSent(!isSent) } ))
+   }
+
    useEffect(() => {
       if (inputRef.current) {
-        inputRef.current.focus();
+         inputRef.current.focus();
       }
-    }, []);
+   }, []);
    
    return (
       <FormContainer title={"Reset password"}>
             <>
-            <div className={classNames(styles.containerDesc, {
-                    [styles.darkContainerDesc]: theme === Theme.Dark,
-                 })}>
-               You will receive an email <span>example@gmail.com.</span> with a link to reset your password!
-            </div>
-
-            <div className={styles.inputsContainer}>
+            {!isSent ? (
+               <>
+               <div className={styles.inputsContainer}>
                <Input
                   title={"Email"}
-                  value={login}
-                  onChange={(value) => setLogin(value)}
+                  value={email}
+                  onChange={(value) => setEmail(value)}
                   placeholder={"Your email"}
                   ref={inputRef}
                />
@@ -44,13 +48,24 @@ const ResetPassword = () => {
 
                <Button
           className={styles.button}
-          title={"Go to home"}
+          title={"Reset"}
           type={ButtonTypes.Primary}
-          onClick={() => {}}
+          onClick={OnSend}
         />
+               </>) : (
+                  <div className={classNames(styles.containerDesc, {
+                     [styles.darkContainerDesc]: theme === Theme.Dark,
+                  })}>
+                You will receive an email <span>example@gmail.com.</span> with a link to reset your password!
+             </div>
+               ) }
+            
+
+            
             </>
         </FormContainer>
     );
 };
+
 
 export default ResetPassword;

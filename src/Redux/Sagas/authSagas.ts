@@ -1,7 +1,8 @@
+import { resetPasswordConfirmPayload, SendResetEmailPayload } from './../Types/auth';
 import { takeLatest, all, call, put } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 
-import { registerUser, activateUser, signInUser, setLoggedIn, setUserData, getUserData, logoutUser } from "../Reducers/authReducer";
+import { registerUser, activateUser, signInUser, setLoggedIn, setUserData, getUserData, logoutUser, sendResetEmail, resetPasswordConfirm } from "../Reducers/authReducer";
 import { RegisterUserPayload, ActivateUserPayload, SignInUserPayload } from "../Types/auth";
 import API from "../utils/api";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../../Constants/consts";
@@ -64,6 +65,28 @@ function* logoutUserWorker() {
   localStorage.removeItem(REFRESH_TOKEN_KEY)
 }
 
+function* sendResetEmailWorker(action: PayloadAction<SendResetEmailPayload>) {
+  const {callback, email} = action.payload
+  const { ok, problem } = yield call(API.sendResetEmail, email);
+  if (ok) {
+    callback();
+  } else {
+    console.warn("Error while reseting email: ", problem);
+    toast.error("Error while reseting email");
+  }
+}
+
+function* resetPasswordConfirmWorker(action: PayloadAction<resetPasswordConfirmPayload>) {
+  const { data, callback} = action.payload
+  const { ok, problem } = yield call(API.resetPasswordConfirm, data);
+  if (ok) {
+    callback();
+  } else {
+    console.warn("Error while reseting password: ", problem);
+    toast.error("Error while reseting password");
+  }
+}
+
 export default function* authSaga() {
   yield all([
     takeLatest(registerUser, registerUserWorker),
@@ -71,5 +94,7 @@ export default function* authSaga() {
     takeLatest(signInUser, signInUserWorker),
     takeLatest(getUserData, getUserDataWorker),
     takeLatest(logoutUser, logoutUserWorker),
+    takeLatest(sendResetEmail, sendResetEmailWorker),
+    takeLatest(resetPasswordConfirm, resetPasswordConfirmWorker),
   ]);
 }

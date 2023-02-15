@@ -55,21 +55,21 @@ const SignIn = () => {
                />
             </div>
                
-               <div className={styles.forgotPassword}>{"Forgot password?"}</div>
+               <div className={styles.forgotPassword}><NavLink to={PathNames.ResetPassword} className={styles.redirectButton}>{"Forgot password?"}</NavLink></div>
 
                <Button
-          className={styles.button}
-          title={"Sign In"}
-          type={ButtonTypes.Primary}
-          onClick={onSignIn}
-        />
-        <div className={styles.signContainer}>
-          {"Don’t have an account?"}{" "}
-          <NavLink to={PathNames.SignUp} className={styles.redirectButton}>{"Sign Up"}</NavLink>
-        </div>
+                  className={styles.button}
+                  title={"Sign In"}
+                  type={ButtonTypes.Primary}
+                  onClick={onSignIn}
+               />
+         <div className={styles.signContainer}>
+            {"Don’t have an account?"}{" "}
+            <NavLink to={PathNames.SignUp} className={styles.redirectButton}>{"Sign Up"}</NavLink>
+         </div>
             </>
-        </FormContainer>
-    );
+         </FormContainer>
+   );
 };
 
 export default SignIn;
