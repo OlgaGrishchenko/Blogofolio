@@ -46,7 +46,10 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 API https://studapi.teachmeskills.by/api/schema/swagger-ui/#/
+
 Login       bamados613@ekcsoft.com
+
 Password    Olga123456789
+
 Name        Olga_100
 
