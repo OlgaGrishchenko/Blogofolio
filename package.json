@@ -1,7 +1,7 @@
 {
   "name": "Blogofolio",
   "version": "0.1.0",
-  "homepage": "https://OlgaGrishchenko.github.io/react-app",
+  "homepage": "https://OlgaGrishchenko.github.io/Blogofolio",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.0",
