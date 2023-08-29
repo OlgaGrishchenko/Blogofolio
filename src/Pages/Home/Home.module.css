@@ -19,7 +19,7 @@
 
 .pagination {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content:space-between;
   font-family: 'Inter';
   font-style: normal;
@@ -33,6 +33,8 @@
 .pageNumber {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
+  max-width: 80%;
 }
 
 .page:hover {
