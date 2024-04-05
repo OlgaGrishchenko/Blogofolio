@@ -93,7 +93,7 @@ const Home = () => {
                     [styles.darkPageTitle]: theme === Theme.Dark,
                 })}
             >
-                {"Blog"}
+                {"Blog Olga"}
             </div>
             
             {!isLoading ? (
